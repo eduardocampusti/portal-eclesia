@@ -1,20 +1,37 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Portal Eclésia - Igreja Presbiteriana
 
-# Run and deploy your AI Studio app
+Um sistema moderno de gestão e portal web para a Igreja Presbiteriana, focado em transparência, comunicação e facilidade de uso.
 
-This contains everything you need to run your app locally.
+## ✨ Funcionalidades
 
-View your app in AI Studio: https://ai.studio/apps/drive/1f6TzfsNbOWMbbeB6cibb8mz4nFcR519j
+### 🌐 Portal Público (Landing Page)
+- **Hero Banner Dinâmico**: Mensagem de boas-vindas e slogan personalizáveis.
+- **Banners Rotativos**: Gestão de banners com upload de imagens e links.
+- **Seção Institucional**: Missão, visão e história da igreja.
+- **Agenda e Eventos**: Calendário de atividades da semana.
+- **Mensagens e Sermões**: Integração com YouTube para exibição de cultos.
+- **Contribuição Digital**: Seção de ofertas com PIX (QR Code e Chave) e contas bancárias.
 
-## Run Locally
+### ⚙️ Painel Administrativo
+- **Gerenciador de Configurações (Settings Manager)**: Edição total do conteúdo do site sem precisar mexer no código.
+- **Upload Inteligente**: Compactação automática de imagens para garantir performance.
+- **Gestão Financeira**: Configuração fácil de dados para dízimos e ofertas, incluindo upload de QR Code personalizado.
+- **Segurança**: Acesso restrito via autenticação Supabase.
 
-**Prerequisites:**  Node.js
+## 🛠️ Tecnologias
 
+- **Frontend**: React (Vite) + Tailwind CSS
+- **Ícones**: Lucide React
+- **Backend**: Supabase (Database & Auth)
+- **Deploy**: Pronto para Vercel/Netlify
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🚀 Como Executar
+
+1. Clone o repositório
+2. Instale as dependências: `npm install`
+3. Configure as variáveis de ambiente no `.env.local`
+4. Execute: `npm run dev`
+
+---
+Desenvolvido com foco na excelência e na obra de Deus.
+
