@@ -1,0 +1,7 @@
+{
+  "name": "Portal Eclésia - Igreja Presbiteriana",
+  "description": "Um sistema integrado de gestão e portal público para Igrejas Presbiterianas, com controle de acesso por perfis, gestão de sermões, membros, eventos e financeiro, pronto para integração mobile.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
