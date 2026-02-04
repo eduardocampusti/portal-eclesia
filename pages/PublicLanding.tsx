@@ -70,7 +70,6 @@ const PublicLanding: React.FC = () => {
         setEvents(e.slice(0, 3));
 
         if (set) {
-          // Merge defaults with fetched settings, ensuring no empty strings break layout
           setSettings({
             ...DEFAULT_SETTINGS,
             ...set,
@@ -79,7 +78,6 @@ const PublicLanding: React.FC = () => {
             hero_image_url: set.hero_image_url || DEFAULT_SETTINGS.hero_image_url,
             mission_title: set.mission_title || DEFAULT_SETTINGS.mission_title,
             about_title: set.about_title || DEFAULT_SETTINGS.about_title,
-            // Finance Defaults
             finance_title: set.finance_title || DEFAULT_SETTINGS.finance_title,
             finance_description: set.finance_description || DEFAULT_SETTINGS.finance_description,
             finance_pix_key: set.finance_pix_key || DEFAULT_SETTINGS.finance_pix_key,
@@ -92,6 +90,33 @@ const PublicLanding: React.FC = () => {
             finance_bank2_agency: set.finance_bank2_agency || DEFAULT_SETTINGS.finance_bank2_agency,
             finance_bank2_account: set.finance_bank2_account || DEFAULT_SETTINGS.finance_bank2_account,
           });
+
+          // Inject JSON-LD Schema
+          const schema = {
+            "@context": "https://schema.org",
+            "@type": "ReligiousOrganization",
+            "name": "Igreja Presbiteriana em Brotas de Macaúbas",
+            "url": "https://portaleclesia.com.br",
+            "logo": "https://portaleclesia.com.br/logo.jpg",
+            "description": set.hero_subtitle || DEFAULT_SETTINGS.hero_subtitle,
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": set.contact_address || DEFAULT_SETTINGS.contact_address,
+              "addressLocality": "Brotas de Macaúbas",
+              "addressRegion": "BA",
+              "addressCountry": "BR"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": set.contact_phone || DEFAULT_SETTINGS.contact_phone,
+              "contactType": "customer service"
+            }
+          };
+
+          const script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.text = JSON.stringify(schema);
+          document.head.appendChild(script);
         }
       } catch (error) {
         console.error('Error fetching landing data:', error);
@@ -106,7 +131,7 @@ const PublicLanding: React.FC = () => {
       <nav className="fixed top-0 w-full glass z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 flex justify-between h-20 items-center">
           <div className="flex items-center space-x-4">
-            <img src="/logo.jpg" alt="Logo" className="h-16 w-auto object-contain" />
+            <img src="/logo.jpg" alt="Logo da Igreja Presbiteriana em Brotas de Macaúbas" className="h-16 w-auto object-contain" />
             <div className="flex flex-col">
               <span className="font-black text-lg text-emerald-900 leading-tight uppercase tracking-tighter">Brotas de Macaúbas</span>
               <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest leading-none">Igreja Presbiteriana</span>
@@ -156,7 +181,7 @@ const PublicLanding: React.FC = () => {
             <div className="absolute -inset-4 bg-blue-800 rounded-[48px] rotate-3 opacity-10"></div>
             <img
               src={settings.hero_image_url}
-              alt="Igreja"
+              alt={`Fachada ou ambiente da ${settings.hero_title}`}
               className="relative rounded-[40px] shadow-2xl object-cover h-[600px] w-full"
             />
           </div>
@@ -313,6 +338,30 @@ const PublicLanding: React.FC = () => {
               <p className="text-sm text-blue-900 leading-relaxed font-medium italic">
                 "Cada um contribua conforme determinou em seu coração, não com pesar nem por obrigação, pois Deus ama quem dá com alegria." - 2 Co 9:7
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ / GEO Section */}
+      <section className="py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center space-y-4 mb-20">
+            <h2 className="text-4xl font-black text-slate-900">Perguntas Frequentes</h2>
+            <p className="text-slate-500 font-medium">Tire suas dúvidas sobre nossa igreja e como participar.</p>
+          </div>
+          <div className="space-y-6">
+            <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-100">
+              <h4 className="font-black text-slate-900 mb-3 uppercase tracking-widest text-sm">Quais são os horários dos cultos?</h4>
+              <p className="text-slate-600 leading-relaxed font-medium">Nossos cultos principais acontecem aos domingos pela manhã e à noite. Verifique a seção de agenda para horários específicos nesta semana.</p>
+            </div>
+            <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-100">
+              <h4 className="font-black text-slate-900 mb-3 uppercase tracking-widest text-sm">Como posso contribuir?</h4>
+              <p className="text-slate-600 leading-relaxed font-medium">Você pode contribuir através de dízimos e ofertas via PIX ou transferência bancária, utilizando os dados disponíveis na seção "Contribuições" do nosso portal.</p>
+            </div>
+            <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-100">
+              <h4 className="font-black text-slate-900 mb-3 uppercase tracking-widest text-sm">Vocês possuem atividades para crianças?</h4>
+              <p className="text-slate-600 leading-relaxed font-medium">Sim! Temos a Escola Bíblica Dominical e momentos específicos para as crianças durante nossos encontros, focados no ensino bíblico reformado.</p>
             </div>
           </div>
         </div>
