@@ -22,7 +22,9 @@ import {
     Heart,
     DollarSign,
     QrCode,
-    Landmark
+    Landmark,
+    ArrowUp,
+    ArrowDown
 } from 'lucide-react';
 import { SiteSettings, Banner } from '../types';
 import { churchService } from '../services/churchService';
@@ -206,15 +208,21 @@ const SettingsManager: React.FC = () => {
         }
     };
 
-    const toggleBannerActive = (id: string, e: React.MouseEvent) => {
+    const moveBanner = (id: string, direction: 'up' | 'down', e: React.MouseEvent) => {
         e.stopPropagation();
         setSettings(prev => {
-            const newBanners = [...(prev.banners || [])];
-            const index = newBanners.findIndex(b => b.id === id);
-            if (index !== -1) {
-                newBanners[index] = { ...newBanners[index], active: !newBanners[index].active };
-            }
-            return { ...prev, banners: newBanners };
+            const banners = [...(prev.banners || [])];
+            const index = banners.findIndex(b => b.id === id);
+            if (index === -1) return prev;
+
+            const newIndex = direction === 'up' ? index - 1 : index + 1;
+            if (newIndex < 0 || newIndex >= banners.length) return prev;
+
+            const temp = banners[index];
+            banners[index] = banners[newIndex];
+            banners[newIndex] = temp;
+
+            return { ...prev, banners };
         });
     };
 
@@ -473,20 +481,53 @@ const SettingsManager: React.FC = () => {
                                                             <p className="text-xs text-slate-500 truncate">{banner.subtitle || 'Sem descrição'}</p>
                                                         </div>
                                                         <div
-                                                            onClick={(e) => toggleBannerActive(banner.id, e)}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setSettings(prev => {
+                                                                    const newBanners = [...(prev.banners || [])];
+                                                                    const idx = newBanners.findIndex(b => b.id === banner.id);
+                                                                    if (idx !== -1) {
+                                                                        newBanners[idx] = { ...newBanners[idx], active: !newBanners[idx].active };
+                                                                    }
+                                                                    return { ...prev, banners: newBanners };
+                                                                });
+                                                            }}
                                                             className={`w-3 h-3 rounded-full flex-shrink-0 mt-1 ${banner.active ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-slate-300'}`}
                                                             title={banner.active ? 'Ativo' : 'Inativo'}
                                                         />
                                                     </div>
 
-                                                    {/* Delete Button */}
-                                                    <button
-                                                        onClick={(e) => deleteBanner(banner.id, e)}
-                                                        className="absolute top-3 right-3 p-2 bg-white/90 text-rose-500 rounded-lg shadow-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-rose-50 hover:scale-110"
-                                                        title="Excluir"
-                                                    >
-                                                        <Trash2 size={16} />
-                                                    </button>
+                                                    {/* Action Buttons Overlay */}
+                                                    <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                                                        <button
+                                                            onClick={(e) => deleteBanner(banner.id, e)}
+                                                            className="p-2 bg-white/95 text-rose-500 rounded-lg shadow-md hover:bg-rose-50 hover:scale-110 transition-all"
+                                                            title="Excluir"
+                                                        >
+                                                            <Trash2 size={14} />
+                                                        </button>
+
+                                                        {settings.banners && settings.banners.length > 1 && (
+                                                            <div className="flex flex-col gap-1">
+                                                                <button
+                                                                    onClick={(e) => moveBanner(banner.id, 'up', e)}
+                                                                    disabled={settings.banners.indexOf(banner) === 0}
+                                                                    className="p-2 bg-white/95 text-blue-600 rounded-lg shadow-md hover:bg-blue-50 hover:scale-110 transition-all disabled:opacity-30 disabled:hover:scale-100"
+                                                                    title="Mover para cima"
+                                                                >
+                                                                    <ArrowUp size={14} />
+                                                                </button>
+                                                                <button
+                                                                    onClick={(e) => moveBanner(banner.id, 'down', e)}
+                                                                    disabled={settings.banners.indexOf(banner) === settings.banners.length - 1}
+                                                                    className="p-2 bg-white/95 text-blue-600 rounded-lg shadow-md hover:bg-blue-50 hover:scale-110 transition-all disabled:opacity-30 disabled:hover:scale-100"
+                                                                    title="Mover para baixo"
+                                                                >
+                                                                    <ArrowDown size={14} />
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
