@@ -14,7 +14,11 @@ const isValidUrl = (url: string) => {
 };
 
 if (!supabaseUrl || !supabaseAnonKey || !isValidUrl(supabaseUrl)) {
-    console.warn('Supabase credentials missing or invalid. Check your .env.local file. Using dummy client to prevent crash.');
+    console.warn('Supabase credentials missing or invalid. Check your Vercel Environment Variables.');
+    console.log('URL provided:', supabaseUrl ? `${supabaseUrl.substring(0, 10)}...` : 'NONE');
+    console.log('Key length:', supabaseAnonKey ? supabaseAnonKey.length : 0);
+} else {
+    console.log('Supabase client initialized with URL:', `${supabaseUrl.substring(0, 15)}...`);
 }
 
 // Fallback to empty strings if invalid to prevent createClient from throwing if possible, 
