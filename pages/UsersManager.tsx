@@ -322,14 +322,6 @@ const UsersManager: React.FC = () => {
               <p className="text-slate-500 font-medium mt-1">
                 {isEditing ? 'Atualize as permissões deste oficial.' : 'Configure o perfil e credenciais do novo oficial.'}
               </p>
-              {!isEditing && (
-                <div className="mt-4 p-3 bg-amber-50 border border-amber-100 rounded-xl flex items-start gap-2">
-                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-[10px] text-amber-700 font-bold leading-tight">
-                    IMPORTANTE: Além de salvar aqui, lembre-se de criar o acesso em "Authentication / Users" no seu painel do Supabase.
-                  </p>
-                </div>
-              )}
             </div>
 
             {error && (

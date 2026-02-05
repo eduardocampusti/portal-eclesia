@@ -1,6 +1,6 @@
-
+import { createClient } from '@supabase/supabase-js';
 import { Sermon, Event, Member, FinancialTransaction, Announcement, SocialAction, User, SiteSettings } from '../types';
-import { supabase } from './supabaseClient';
+import { supabase, supabaseUrl, supabaseAnonKey } from './supabaseClient';
 
 // Helper de persistência local para fallback
 const localStore = {
@@ -38,12 +38,38 @@ export const churchService = {
   },
   addUser: async (u: Omit<User, 'id'> & { password?: string }) => {
     const { password, ...userData } = u;
-    const newUser = { ...u, id: Math.random().toString(36).substr(2, 9) };
+
+    // 1. Criar a conta de autenticação (Login) via Supabase Auth
+    // Usamos um cliente secundário com persistSession: false para não deslogar o admin atual
+    if (password) {
+      const authClient = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: { persistSession: false }
+      });
+
+      const { error: signUpError } = await authClient.auth.signUp({
+        email: u.email,
+        password: password,
+        options: {
+          data: {
+            full_name: u.name,
+            role: u.roleId
+          }
+        }
+      });
+
+      if (signUpError) {
+        console.error('Erro ao criar login no Supabase Auth:', signUpError);
+        throw signUpError;
+      }
+    }
+
+    // 2. Criar o perfil na tabela 'users' (Permissões/Cargo)
     try {
       const { error } = await supabase.from('users').insert([userData]);
       if (error) throw error;
     } catch (err) {
       console.warn('Supabase insert failed, saving User locally');
+      const newUser = { ...u, id: Math.random().toString(36).substr(2, 9) };
       localStore.saveOne<User>('users', newUser as any);
     }
   },
