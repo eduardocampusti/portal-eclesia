@@ -37,13 +37,13 @@ export const churchService = {
     }
   },
   addUser: async (u: Omit<User, 'id'> & { password?: string }) => {
+    const { password, ...userData } = u;
     const newUser = { ...u, id: Math.random().toString(36).substr(2, 9) };
     try {
-      const { error } = await supabase.from('users').insert([u]);
+      const { error } = await supabase.from('users').insert([userData]);
       if (error) throw error;
     } catch (err) {
       console.warn('Supabase insert failed, saving User locally');
-      // u já contém o password aqui
       localStore.saveOne<User>('users', newUser as any);
     }
   },

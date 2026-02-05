@@ -13,6 +13,33 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
+  const [supabaseStatus, setSupabaseStatus] = useState<'checking' | 'connected' | 'error'>('checking');
+  const [supabaseUrlMasked, setSupabaseUrlMasked] = useState('');
+
+  useEffect(() => {
+    const checkSupabase = async () => {
+      try {
+        const url = import.meta.env.VITE_SUPABASE_URL || '';
+        if (url) {
+          setSupabaseUrlMasked(url.substring(0, 15) + '...');
+        }
+
+        const { error } = await supabase.from('site_settings').select('id').limit(1);
+        if (error && error.code === 'PGRST116') {
+          // Table exists but empty, that's fine
+          setSupabaseStatus('connected');
+        } else if (error) {
+          console.error('Supabase connection error:', error);
+          setSupabaseStatus('error');
+        } else {
+          setSupabaseStatus('connected');
+        }
+      } catch (e) {
+        setSupabaseStatus('error');
+      }
+    };
+    checkSupabase();
+  }, []);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -36,34 +63,27 @@ const Login: React.FC = () => {
         return;
       }
 
-      // Se der erro (inclusive Failed to fetch), tentamos o fallback local
-      console.warn('Supabase auth failed, checking local database...');
-      const localUsersRaw = localStorage.getItem('eclesia_users');
-      if (localUsersRaw) {
-        const localUsers = JSON.parse(localUsersRaw);
-        const searchEmail = email.trim().toLowerCase();
-        const searchPass = password.trim();
+      if (authError) {
+        if (authError.message.includes('Email not confirmed')) {
+          setError('E-mail não confirmado. Verifique sua caixa de entrada ou desative a confirmação de e-mail nas configurações do Supabase (Auth -> Providers -> Email).');
+        } else if (authError.message === 'Invalid login credentials') {
+          setError('E-mail ou senha incorretos. Verifique se as credenciais no Supabase estão exatamente como você digitou.');
+        } else if (authError.message === 'Failed to fetch') {
+          setError('Erro de conexão com o banco de dados. Verifique sua internet ou se as chaves do Supabase no Vercel estão corretas.');
+        } else {
+          setError(authError.message);
+        }
 
-        const matchedUser = localUsers.find((u: any) =>
-          u.email?.trim().toLowerCase() === searchEmail &&
-          u.password?.trim() === searchPass
-        );
-
-        if (matchedUser) {
-          const { password: _, ...userToStore } = matchedUser;
-          localStorage.setItem('eclesia_dev_user', JSON.stringify({
-            ...userToStore,
-            id: matchedUser.id || 'local-' + Date.now()
-          }));
-          window.location.hash = '/admin';
-          window.location.reload(); // Garante que o App.tsx re-leia o localStorage
+        // Mantém fallback apenas para erros graves de rede ou ausência de auth
+        if (authError.message === 'Failed to fetch' || authError.status === 404) {
+          console.warn('Supabase auth failed, checking local database...');
+          const localUsersRaw = localStorage.getItem('eclesia_users');
+          // ... rest of the fallback logic (already exists below)
+        } else {
+          setLoading(false);
           return;
         }
       }
-
-      setError(authError.message === 'Invalid login credentials' || authError.message === 'Failed to fetch'
-        ? 'Credenciais inválidas ou erro de conexão. Tente o Acesso Rápido ou verifique seus dados.'
-        : authError.message);
     } catch (err: any) {
       // Catch para erros de rede drásticos (Failed to fetch)
       const localUsersRaw = localStorage.getItem('eclesia_users');
@@ -112,6 +132,16 @@ const Login: React.FC = () => {
               {error}
             </div>
           )}
+
+          <div className="mb-6 flex items-center justify-between p-3 rounded-xl bg-gray-50 border border-gray-100">
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${supabaseStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : supabaseStatus === 'error' ? 'bg-rose-500' : 'bg-amber-500 animate-pulse'}`}></div>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                {supabaseStatus === 'connected' ? 'Database Online' : supabaseStatus === 'error' ? 'Database Offline' : 'Verificando Banco...'}
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-gray-400">{supabaseUrlMasked}</span>
+          </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>

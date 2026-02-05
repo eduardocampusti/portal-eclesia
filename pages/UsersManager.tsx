@@ -17,7 +17,9 @@ import {
   AlertCircle,
   ShieldAlert,
   Lock,
-  Pencil
+  Pencil,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 
 const UsersManager: React.FC = () => {
@@ -31,6 +33,7 @@ const UsersManager: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState<Partial<User> & { password?: string }>({
     name: '', email: '', roleId: RoleType.SECRETARIA, password: ''
   });
@@ -300,6 +303,7 @@ const UsersManager: React.FC = () => {
                   setShowInvite(false);
                   setIsEditing(false);
                   setEditingId(null);
+                  setShowPassword(false);
                   setNewUser({ name: '', email: '', roleId: RoleType.SECRETARIA, password: '' });
                 }}
                 className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-rose-50 hover:text-rose-600 transition-all"
@@ -318,6 +322,14 @@ const UsersManager: React.FC = () => {
               <p className="text-slate-500 font-medium mt-1">
                 {isEditing ? 'Atualize as permissões deste oficial.' : 'Configure o perfil e credenciais do novo oficial.'}
               </p>
+              {!isEditing && (
+                <div className="mt-4 p-3 bg-amber-50 border border-amber-100 rounded-xl flex items-start gap-2">
+                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-[10px] text-amber-700 font-bold leading-tight">
+                    IMPORTANTE: Além de salvar aqui, lembre-se de criar o acesso em "Authentication / Users" no seu painel do Supabase.
+                  </p>
+                </div>
+              )}
             </div>
 
             {error && (
@@ -384,13 +396,20 @@ const UsersManager: React.FC = () => {
                     <Lock size={18} />
                   </div>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     required={!isEditing}
-                    className="w-full bg-slate-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl pl-16 pr-6 py-4 outline-none transition-all font-medium text-slate-900"
+                    className="w-full bg-slate-50 border-2 border-transparent focus:border-blue-500 focus:bg-white rounded-2xl pl-16 pr-12 py-4 outline-none transition-all font-medium text-slate-900"
                     value={newUser.password}
                     onChange={e => setNewUser({ ...newUser, password: e.target.value })}
                     placeholder={isEditing ? '********' : 'Defina uma senha'}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-blue-600 transition-colors"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
                 </div>
               </div>
 

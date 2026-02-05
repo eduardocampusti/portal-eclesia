@@ -65,6 +65,7 @@ const App: React.FC = () => {
 
     // Initial Session Check
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('App: Initial session check:', session ? 'User logged in: ' + session.user.email : 'No session');
       if (session?.user) {
         setUser({
           id: session.user.id,
@@ -77,7 +78,8 @@ const App: React.FC = () => {
     });
 
     // Listen for changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('App: Auth state change event:', event, session?.user?.email || 'No user');
       if (session?.user) {
         setUser({
           id: session.user.id,
