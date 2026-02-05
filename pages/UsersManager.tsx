@@ -34,6 +34,8 @@ const UsersManager: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<{ id: string, name: string } | null>(null);
   const [newUser, setNewUser] = useState<Partial<User> & { password?: string }>({
     name: '', email: '', roleId: RoleType.SECRETARIA, password: ''
   });
@@ -98,12 +100,23 @@ const UsersManager: React.FC = () => {
   };
 
   const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Deseja realmente remover o acesso de ${name}?`)) return;
+    setUserToDelete({ id, name });
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!userToDelete) return;
+
+    setActionLoading(true);
     try {
-      await churchService.deleteUser(id);
+      await churchService.deleteUser(userToDelete.id);
       await load();
+      setShowDeleteConfirm(false);
+      setUserToDelete(null);
     } catch (err: any) {
-      alert('Erro ao excluir usuário: ' + (err.message || 'Erro desconhecido'));
+      setError('Erro ao excluir usuário: ' + (err.message || 'Erro desconhecido'));
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -416,6 +429,43 @@ const UsersManager: React.FC = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[60] flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-[40px] w-full max-w-md p-10 shadow-2xl relative overflow-hidden animate-in zoom-in duration-300">
+            <div className="text-center">
+              <div className="bg-rose-100 w-20 h-20 rounded-3xl flex items-center justify-center text-rose-600 mx-auto mb-8 shadow-inner">
+                <ShieldAlert size={40} />
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 tracking-tight mb-2">Confirmar Exclusão</h3>
+              <p className="text-slate-500 font-medium leading-relaxed">
+                Tem certeza que deseja remover o acesso de <span className="text-slate-900 font-black">{userToDelete?.name}</span>? Esta ação não pode ser desfeita.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mt-10">
+              <button
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setUserToDelete(null);
+                }}
+                className="py-4 bg-slate-100 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all active:scale-95"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmDelete}
+                disabled={actionLoading}
+                className="py-4 bg-rose-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-rose-700 shadow-xl shadow-rose-200 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {actionLoading ? <Loader2 className="animate-spin" size={16} /> : <Trash2 size={16} />}
+                {actionLoading ? 'Excluindo...' : 'Sim, Remover'}
+              </button>
+            </div>
           </div>
         </div>
       )}
