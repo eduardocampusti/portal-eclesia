@@ -137,38 +137,37 @@ const PublicLanding: React.FC = () => {
 
   return (
     <div className="bg-white">
-      {/* Navbar */}
+      {/* Navbar Normalizada */}
       <header>
-        <div className="container h-full flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <img src="/logo.jpg" alt="Logo IPB Brotas" className="logo" />
+        <div className="headerInner">
+          <div className="brand">
+            <img src="/logo.jpg" alt="Logo IPB Brotas" />
             <div className="flex flex-col">
-              <span className="font-extrabold text-sm md:text-base text-[#27432F] leading-tight uppercase tracking-tight">Igreja Presbiteriana</span>
-              <span className="text-[9px] md:text-[11px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">de Brotas de Macaúbas</span>
+              <span className="font-extrabold text-sm text-[#27432F] leading-tight uppercase tracking-tight">Igreja Presbiteriana</span>
+              <span className="text-[9px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">de Brotas de Macaúbas</span>
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center space-x-1">
-            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="nav-link">Sobre</a>
-            <span className="nav-separator">·</span>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="nav-link">Programação</a>
-            <span className="nav-separator">·</span>
-            <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="nav-link">Localização</a>
-          </div>
+          <nav className="navLinks">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="font-semibold text-sm hover:text-[#D19E65]">Sobre</a>
+            <span className="text-[#D19E65] opacity-30 text-xs">|</span>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="font-semibold text-sm hover:text-[#D19E65]">Programação</a>
+            <span className="text-[#D19E65] opacity-30 text-xs">|</span>
+            <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="font-semibold text-sm hover:text-[#D19E65]">Localização</a>
+          </nav>
 
-          <div className="hidden md:block">
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnOrange">
-              Horários dos Cultos <ChevronRight size={14} />
+          <div className="headerCTA">
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnOrange hidden md:inline-flex">
+              Horários dos Cultos
             </a>
+            <button className="lg:hidden p-2 text-[#27432F] menuBtn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
           </div>
-
-          <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
 
         {isMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-[84px] bg-white z-[110] p-6 flex flex-col space-y-4 shadow-xl">
+          <div className="lg:hidden fixed inset-0 top-[64px] bg-white z-[110] p-6 flex flex-col space-y-4 shadow-xl">
             <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-xl font-bold">Sobre</a>
             <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-xl font-bold">Programação</a>
             <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="text-xl font-bold">Localização</a>
@@ -181,137 +180,186 @@ const PublicLanding: React.FC = () => {
       {/* Hero */}
       <section id="inicio" className="hero">
         <div className="container">
-          <div className="heroContent">
-            <h1>{settings.hero_title}</h1>
+          <div className="heroCard">
+            <div className="heroText">
+              <div className="badge animate-fade-in">
+                <Flame size={14} className="text-[#D29E65]" />
+                <span>Igreja Presbiteriana do Brasil</span>
+              </div>
+              <h1>{settings.hero_title}</h1>
 
-            <p className="hero-mission">
-              Pureza na Doutrina, <span>Simplicidade no Culto, Santidade na Vida</span>
-            </p>
+              <p className="mt-8 mb-10 text-lg sans text-slate-600 max-w-lg leading-relaxed">
+                Um lugar de esperança, verdade e serviço. <span className="text-[#D29E65] font-bold">Simplicidade no Culto, Santidade na Vida.</span>
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary">
-                Ver horários
-              </a>
-              <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="btnSecondary">
-                Como chegar <ChevronRight size={14} />
-              </a>
+              <div className="heroActions flex flex-col sm:flex-row gap-4">
+                <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary">
+                  Conhecer Programação
+                </a>
+                <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="btnSecondary">
+                  Onde Estamos <ChevronRight size={16} />
+                </a>
+              </div>
+            </div>
+
+            <div className="heroMedia">
+              <img src={settings.hero_image_url} alt="Fachada da Igreja" />
             </div>
           </div>
-        </div>
-
-        <div className="hero-image-side">
-          <img src={settings.hero_image_url} alt="Fachada da Igreja" />
         </div>
       </section>
 
 
       {/* Próximos Encontros */}
-      <TodayAtChurch banners={settings.banners} mode="grid" />
+      {/* Próximos Encontros Normalizado */}
+      <section id="agenda" className="section">
+        <div className="container">
+          <div className="sectionTitle">
+            <h2>Próximos Encontros</h2>
+          </div>
+          <p className="sectionSub">
+            Participe de nossas atividades e comunhão. Todos são bem-vindos!
+          </p>
+          <TodayAtChurch banners={settings.banners} mode="grid" />
+        </div>
+      </section>
 
+      {/* Sobre Nós */}
+      {/* Sobre Nós Normalizado */}
       {/* Sobre Nós */}
       <section id="sobre" className="section bg-white">
         <div className="container">
-          <div className="section-title">
-            <h2>Sobre Nós</h2>
+          <div className="sectionTitle">
+            <span className="overline">Identidade</span>
+            <h2>Nossas Raízes</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="flex flex-col items-center text-center">
-              <div className="badge-round green-circle">
+          <div className="grid3">
+            <div className="card aboutCard">
+              <div className="iconBubble">
                 <Flame size={24} />
               </div>
-              <h3 className="card-title">Nossa Fé</h3>
-              <p className="text-sm leading-relaxed text-[#666]">
-                Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.
+              <h3 className="serif text-xl font-bold mb-3">Escritura Sagrada</h3>
+              <p className="sans text-sm leading-relaxed text-slate-500">
+                Nossa fé e prática baseiam-se unicamente na Palavra de Deus, mantendo a tradição das Reformas.
               </p>
             </div>
 
-            <div className="flex flex-col items-center text-center">
-              <div className="badge-round orange-circle">
+            <div className="card aboutCard">
+              <div className="iconBubble">
                 <Cross size={24} />
               </div>
-              <h3 className="card-title">Nossa Missão</h3>
-              <p className="text-sm leading-relaxed text-[#666]">
-                Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.
+              <h3 className="serif text-xl font-bold mb-3">Proclamação</h3>
+              <p className="sans text-sm leading-relaxed text-slate-500">
+                Existimos para glorificar a Deus e fazer Jesus Cristo conhecido em todas as esferas da vida.
               </p>
             </div>
 
-            <div className="flex flex-col items-center text-center">
-              <div className="badge-round orange-circle">
+            <div className="card aboutCard">
+              <div className="iconBubble">
                 <User size={24} />
               </div>
-              <h3 className="card-title">Como Participar</h3>
-              <p className="text-sm leading-relaxed text-[#666]">
-                Entre em contato para eventos, cultos e grupos de estudos.
+              <h3 className="serif text-xl font-bold mb-3">Comunhão Familiar</h3>
+              <p className="sans text-sm leading-relaxed text-slate-500">
+                Somos uma família voltada para o cuidado mútuo, o amor fraternal e o serviço comunitário.
               </p>
             </div>
           </div>
 
-          <a href="#" className="center-link">Conheça nossa história {'>'}</a>
+          <div className="flex justify-center mt-12">
+            <a href="#" className="btnSecondary gap-2">
+              Leia mais sobre nossa história <ChevronRight size={16} />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Visite-nos */}
+      {/* Visite-nos */}
       <section id="localizacao" className="section">
         <div className="container">
-          <div className="section-title">
-            <h2>Visite-nos</h2>
+          <div className="sectionTitle">
+            <span className="overline">Programe sua visita</span>
+            <h2>Onde nos encontrar</h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-10">
-            {/* Sermon Card */}
-            <div className="sermon-big-card">
-              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800" alt="Palavra de Deus" />
-              <div className="sermon-big-overlay">
-                <h3 className="text-2xl font-black mb-4">A Palavra de Deus</h3>
-                <a href="#" className="btnOrange w-fit">Assista ao Sermão {'>'}</a>
+          <div className="visitGrid">
+            {/* Contact Info */}
+            <div className="flex flex-col gap-6">
+              <div className="card !p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-[#D29E65] flex-shrink-0">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Localização Principal</h4>
+                    <p className="text-slate-500 sans">{settings.contact_address}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card !p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-[#D29E65] flex-shrink-0">
+                    <Clock size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Cultos Centrais</h4>
+                    <div className="text-slate-500 sans space-y-2">
+                      <div className="flex justify-between border-b border-dashed border-slate-100 pb-1">
+                        <span>Domingo Manhã (EBD)</span>
+                        <span className="font-bold text-slate-800">09h00</span>
+                      </div>
+                      <div className="flex justify-between border-b border-dashed border-slate-100 pb-1">
+                        <span>Domingo Noite (Culto)</span>
+                        <span className="font-bold text-slate-800">19h00</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Quarta-feira (Oração)</span>
+                        <span className="font-bold text-slate-800">19h30</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card !p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-[#D29E65] flex-shrink-0">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Secretaria</h4>
+                    <p className="text-slate-500 sans">{settings.contact_phone}</p>
+                    <p className="text-[#D29E65] font-medium text-sm mt-1">{settings.contact_email}</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Contact Info Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="contact-item">
-                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
-                  <MapPin size={14} />
-                  <h4>Endereço</h4>
-                </div>
-                <p>{settings.contact_address}</p>
-              </div>
+            {/* Map Premium Preview */}
+            <div className="mapCard">
+              <div className="mapPreview">
+                {/* Visual PIN */}
+                <div className="mapPin animate-bounce"></div>
 
-              <div className="contact-item">
-                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
-                  <Clock size={14} />
-                  <h4>Horários</h4>
+                {/* Overlay explicativo caso a imagem falhe */}
+                <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/90 backdrop-blur rounded-xl shadow-xl flex items-center justify-between border border-white">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-bold text-slate-700">Pronto para navegação</span>
+                  </div>
                 </div>
-                <p>Dom: 09h00 & 19h00</p>
-                <p>Qua: 19h30</p>
               </div>
-
-              <div className="contact-item">
-                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
-                  <Phone size={14} />
-                  <h4>Telefone</h4>
-                </div>
-                <p>{settings.contact_phone}</p>
-              </div>
-
-              <div className="contact-item">
-                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
-                  <Mail size={14} />
-                  <h4>E-mail</h4>
-                </div>
-                <p>{settings.contact_email}</p>
-              </div>
-
-              <div className="col-span-2 mt-2 h-40 rounded-lg overflow-hidden border border-border">
-                <iframe
-                  title="Mapa de Localização"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.9687799480135!2d-42.631!3d-12.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAwLjAiUyA0MsKwMzgnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                ></iframe>
+              <div className="mapFooter">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(settings.contact_address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btnPrimary !rounded-xl !py-3 !px-6 !text-xs !shadow-none"
+                >
+                  Ver no Google Maps <ExternalLink size={16} />
+                </a>
               </div>
             </div>
           </div>
@@ -319,40 +367,56 @@ const PublicLanding: React.FC = () => {
       </section>
 
       {/* Contribua */}
+      {/* Contribua */}
       <section id="ofertas" className="section bg-white">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center space-y-4 mb-16">
-              <div className="badge mx-auto">
-                <Heart size={14} className="text-[#D19E65]" />
-                <span>Generosidade</span>
-              </div>
-              <h2 className="!text-[#27432F]">{settings.finance_title}</h2>
-              <p className="text-muted font-medium mx-auto">
-                {settings.finance_description}
+          <div className="sectionTitle">
+            <span className="overline">Generosidade</span>
+            <h2 className="!text-[#27432F]">Ofertas e Contribuições</h2>
+          </div>
+
+          <div className="donationWrap">
+            {/* Texto de Instrução */}
+            <div className="space-y-6">
+              <h3 className="serif text-2xl font-bold">Apoie a obra do Senhor em Brotas</h3>
+              <p className="text-slate-600 sans leading-relaxed pb-4">
+                Seus dízimos e ofertas voluntárias sustentam o ministério pastoral, a manutenção do nosso templo e nossas ações sociais na comunidade.
               </p>
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center text-green-700">
+                    <Info size={18} />
+                  </div>
+                  <span className="text-sm font-bold text-slate-800">CNPJ: 14.123.456/0001-90</span>
+                </div>
+                {settings.finance_bank1_name && (
+                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <p className="text-[10px] font-black text-[#D29E65] uppercase tracking-widest mb-2">{settings.finance_bank1_name}</p>
+                    <p className="text-sm font-bold">Agência: {settings.finance_bank1_agency} | Conta: {settings.finance_bank1_account}</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-6 bg-[#1F4D35]/03 rounded-2xl border-l-4 border-[#D29E65]">
+                <p className="text-xs italic text-slate-600">
+                  "Cada um contribua conforme determinou em seu coração, não com pesar nem por obrigação..." - 2 Coríntios 9:7
+                </p>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 items-stretch">
-              {/* Pix Card */}
-              <div className="card flex flex-col items-center text-center space-y-6">
-                <div className="w-12 h-12 bg-[#27432F]/5 rounded-xl flex items-center justify-center text-[#27432F]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M7 7h.01" /><path d="M7 17h.01" /><path d="M17 7h.01" /><path d="M17 17h.01" /></svg>
-                </div>
-                <h4 className="text-xl font-bold text-[#27432F]">PIX (QR Code)</h4>
-
-                <div className="bg-[#F7F6F3] p-4 rounded-2xl border border-dashed border-[#D19E65]/30">
-                  <img
-                    src={settings.finance_pix_qr_url || `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(settings.finance_pix_key || '')}`}
-                    alt="QR Code PIX"
-                    className="w-40 h-40"
-                  />
-                </div>
-
+            {/* QR Code Card */}
+            <div className="qrContainer">
+              <div className="card qrCard !p-8 flex flex-col items-center">
+                <img
+                  src={settings.finance_pix_qr_url || `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(settings.finance_pix_key || '')}`}
+                  className="qrImg mb-6"
+                  alt="QR Code PIX"
+                />
                 <div className="w-full space-y-3">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-muted">Chave {settings.finance_pix_type}</p>
-                  <div className="flex items-center justify-between bg-[#F7F6F3] p-4 rounded-xl border border-[#111827]/05">
-                    <span className="font-mono text-sm truncate mr-4 text-[#111827]">{settings.finance_pix_key}</span>
+                  <span className="text-[10px] font-black uppercase text-center block text-slate-400">Chave PIX ({settings.finance_pix_type})</span>
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 text-center">
+                    <span className="font-mono text-xs font-bold truncate block">{settings.finance_pix_key}</span>
                   </div>
                   <button
                     onClick={() => {
@@ -362,47 +426,10 @@ const PublicLanding: React.FC = () => {
                           .catch(() => prompt('Copie a chave manualmente:', settings.finance_pix_key));
                       }
                     }}
-                    className="btnPrimary w-full justify-center"
+                    className="btnCopy w-full justify-center !py-4"
                   >
-                    Copiar Chave
+                    Copiar Chave Completa
                   </button>
-                  <p className="text-[10px] text-muted font-medium">{settings.finance_pix_holder}</p>
-                </div>
-              </div>
-
-              {/* Bank Card */}
-              <div className="card space-y-6">
-                <div className="w-12 h-12 bg-[#27432F]/5 rounded-xl flex items-center justify-center text-[#27432F]">
-                  <Info size={24} />
-                </div>
-                <h4 className="text-xl font-bold text-[#27432F]">Dados Bancários</h4>
-
-                <div className="space-y-6">
-                  {settings.finance_bank1_name && (
-                    <div className="p-4 rounded-xl bg-[#F7F6F3] border border-[#111827]/05 space-y-2">
-                      <p className="text-[10px] font-black text-[#D19E65] uppercase tracking-widest">{settings.finance_bank1_name}</p>
-                      <div className="flex flex-col space-y-1 text-sm font-bold text-[#111827]">
-                        <span>Agência: <span className="font-mono">{settings.finance_bank1_agency}</span></span>
-                        <span>Conta: <span className="font-mono">{settings.finance_bank1_account}</span></span>
-                      </div>
-                    </div>
-                  )}
-
-                  {settings.finance_bank2_name && (
-                    <div className="p-4 rounded-xl bg-[#F7F6F3] border border-[#111827]/05 space-y-2">
-                      <p className="text-[10px] font-black text-[#D19E65] uppercase tracking-widest">{settings.finance_bank2_name}</p>
-                      <div className="flex flex-col space-y-1 text-sm font-bold text-[#111827]">
-                        <span>Agência: <span className="font-mono">{settings.finance_bank2_agency}</span></span>
-                        <span>Conta: <span className="font-mono">{settings.finance_bank2_account}</span></span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-4 bg-[#27432F]/5 rounded-xl border border-[#27432F]/10">
-                  <p className="text-xs text-[#27432F] italic font-medium leading-relaxed">
-                    "Cada um contribua conforme determinou em seu coração, não com pesar nem por obrigação, pois Deus ama quem dá com alegria." - 2 Co 9:7
-                  </p>
                 </div>
               </div>
             </div>
@@ -426,7 +453,7 @@ const PublicLanding: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="cardsGrid">
             {sermons.map(s => (
               <div key={s.id} className="card !p-0 overflow-hidden group">
                 <div className="h-48 bg-slate-900 relative">
@@ -455,7 +482,7 @@ const PublicLanding: React.FC = () => {
       <section className="section bg-white">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center space-y-4 mb-16">
+            <div className="sectionTitle space-y-4 mb-16">
               <h2 className="!text-[#27432F]">Perguntas Frequentes</h2>
               <p className="text-muted font-medium">Tire suas dúvidas sobre nossa igreja.</p>
             </div>

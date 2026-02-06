@@ -125,30 +125,26 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
 
     // Default: Grid Mode (Programação Semanal)
     return (
-        <section id="agenda" className="section bg-white">
-            <div className="container">
-                <div className="section-title">
-                    <h2>Próximos Encontros</h2>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {activeSchedule.map((item, idx) => (
-                        <div key={idx} className="card">
-                            <h3 className="card-title">{item.title}</h3>
-                            <div className="card-info">
-                                <p>{getWeekdayName(item.day)} - {item.time}</p>
-                                <p>{item.ministry}</p>
-                            </div>
-                            <div className="mt-auto">
-                                <button className="btnOrange w-full">
-                                    Adicionar ao Calendário <ChevronRight size={14} />
-                                </button>
-                            </div>
+        <div className="grid3">
+            {activeSchedule.map((item, idx) => (
+                <div key={idx} className="card eventCard">
+                    <div className="eventTop">
+                        <span className="eventPill">{getWeekdayName(item.day)}</span>
+                        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
+                            <Clock size={12} />
+                            <span>{item.time}</span>
                         </div>
-                    ))}
+                    </div>
+
+                    <h3 className="eventTitle">{item.title}</h3>
+                    <p className="eventDesc sans">{item.ministry}</p>
+
+                    <button className="btnAdd hover:scale-[1.02] active:scale-[0.98] transition-transform">
+                        <Plus size={14} /> Adicionar lembrete
+                    </button>
                 </div>
-            </div>
-        </section>
+            ))}
+        </div>
     );
 };
 
