@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { 
-  BarChart3, 
-  Download, 
-  TrendingUp, 
-  PieChart, 
-  Users, 
+import {
+  BarChart3,
+  Download,
+  TrendingUp,
+  PieChart,
+  Users,
   Loader2
 } from 'lucide-react';
 import { churchService } from '../services/churchService';
@@ -40,7 +40,7 @@ const ReportsManager: React.FC = () => {
   // Membros que entraram nos últimos 90 dias
   const ninetyDaysAgo = new Date();
   ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
-  const newMembersCount = members.filter(m => new Date(m.joinDate) >= ninetyDaysAgo).length;
+  const newMembersCount = members.filter(m => new Date(m.joinDate).getTime() >= ninetyDaysAgo.getTime()).length;
   const previousMemberCount = Math.max(1, members.length - newMembersCount); // Evitar divisão por zero
   const growthRate = ((newMembersCount / previousMemberCount) * 100).toFixed(1);
 
@@ -51,13 +51,13 @@ const ReportsManager: React.FC = () => {
   const totalTithes = incomeTransactions
     .filter(t => t.category === 'Dízimo')
     .reduce((acc, t) => acc + t.amount, 0);
-  
+
   const totalOfferings = incomeTransactions
     .filter(t => t.category === 'Oferta')
     .reduce((acc, t) => acc + t.amount, 0);
 
   const totalIncome = incomeTransactions.reduce((acc, t) => acc + t.amount, 0);
-  
+
   // Per capita (Dízimo / Membros Ativos)
   const tithePerCapita = activeMembers > 0 ? (totalTithes / activeMembers) : 0;
 
@@ -67,7 +67,7 @@ const ReportsManager: React.FC = () => {
 
   // Alocação de Despesas
   const totalExpenses = expenseTransactions.reduce((acc, t) => acc + t.amount, 0);
-  
+
   // Agrupar despesas por categoria
   const expensesByCategory = expenseTransactions.reduce((acc, t) => {
     acc[t.category] = (acc[t.category] || 0) + t.amount;
@@ -75,9 +75,9 @@ const ReportsManager: React.FC = () => {
   }, {} as Record<string, number>);
 
   // Pegar a maior despesa (Categoria com maior gasto)
-  const sortedCategories = Object.entries(expensesByCategory).sort(([, a], [, b]) => b - a);
+  const sortedCategories = Object.entries(expensesByCategory).sort(([, a], [, b]) => (b as number) - (a as number));
   const topExpenseCategory = sortedCategories.length > 0 ? sortedCategories[0] : ['Nenhuma', 0];
-  const topExpensePercentage = totalExpenses > 0 ? ((topExpenseCategory[1] / totalExpenses) * 100).toFixed(0) : 0;
+  const topExpensePercentage = totalExpenses > 0 ? (((topExpenseCategory[1] as number) / totalExpenses) * 100).toFixed(0) : 0;
 
   if (loading) {
     return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin text-blue-600" size={40} /></div>;
@@ -115,7 +115,7 @@ const ReportsManager: React.FC = () => {
               <span className="font-bold text-slate-900">{activeMembers} Membros</span>
             </div>
             <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-               <div className="bg-blue-600 h-full rounded-full" style={{ width: `${Math.min(100, (activeMembers / 200) * 100)}%` }}></div>
+              <div className="bg-blue-600 h-full rounded-full" style={{ width: `${Math.min(100, (activeMembers / 200) * 100)}%` }}></div>
             </div>
           </div>
         </div>
@@ -131,20 +131,20 @@ const ReportsManager: React.FC = () => {
             <p className="text-xs text-gray-400 font-bold mt-2">Dízimo médio per capita</p>
           </div>
           <div className="mt-8 space-y-3">
-             <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
-               <span>Dízimos do Total</span>
-               <span className="text-gray-900">{tithePercentage}%</span>
-             </div>
-             <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-               <div className="h-full bg-emerald-500" style={{ width: `${tithePercentage}%` }}></div>
-             </div>
-             <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400 pt-2">
-               <span>Ofertas do Total</span>
-               <span className="text-gray-900">{offeringPercentage}%</span>
-             </div>
-             <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-               <div className="h-full bg-blue-500" style={{ width: `${offeringPercentage}%` }}></div>
-             </div>
+            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+              <span>Dízimos do Total</span>
+              <span className="text-gray-900">{tithePercentage}%</span>
+            </div>
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-emerald-500" style={{ width: `${tithePercentage}%` }}></div>
+            </div>
+            <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400 pt-2">
+              <span>Ofertas do Total</span>
+              <span className="text-gray-900">{offeringPercentage}%</span>
+            </div>
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-blue-500" style={{ width: `${offeringPercentage}%` }}></div>
+            </div>
           </div>
         </div>
 
@@ -163,19 +163,19 @@ const ReportsManager: React.FC = () => {
             <div className="space-y-2">
               {sortedCategories.slice(0, 3).map(([cat, amount], i) => (
                 <div key={i} className="flex justify-between items-center text-sm">
-                   <span className="text-gray-600 font-medium">{cat}</span>
-                   <span className="text-gray-900 font-bold">R$ {amount.toLocaleString()}</span>
+                  <span className="text-gray-600 font-medium">{cat}</span>
+                  <span className="text-gray-900 font-bold">R$ {amount.toLocaleString()}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-      
+
       <div className="bg-slate-900 rounded-3xl p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2">
-           <h3 className="text-xl font-black tracking-tight">Relatório de Transparência</h3>
-           <p className="text-slate-400 text-sm max-w-md font-medium">Gere automaticamente o relatório para assembleia ordinária com todos os dados consolidados (Entradas: R$ {totalIncome.toLocaleString()} / Saídas: R$ {totalExpenses.toLocaleString()}).</p>
+          <h3 className="text-xl font-black tracking-tight">Relatório de Transparência</h3>
+          <p className="text-slate-400 text-sm max-w-md font-medium">Gere automaticamente o relatório para assembleia ordinária com todos os dados consolidados (Entradas: R$ {totalIncome.toLocaleString()} / Saídas: R$ {totalExpenses.toLocaleString()}).</p>
         </div>
         <button className="bg-white text-slate-900 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-slate-100 transition-colors">
           Gerar Relatório Anual

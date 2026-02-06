@@ -32,10 +32,8 @@ export const CHURCH_BANK_INFO = {
     type: "CNPJ",
     holder: "Igreja Presbiteriana do Brasil - Central"
   },
-  accounts: [
-    { bank: "Banco do Brasil", agency: "1234-5", account: "1010-1" },
-    { bank: "Bradesco", agency: "9876-0", account: "2233-X" }
-  ]
+  accounts: []
+
 };
 
 export const WEEKLY_SCHEDULE = [

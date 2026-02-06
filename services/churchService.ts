@@ -115,6 +115,14 @@ export const churchService = {
       localStore.saveOne<Sermon>('sermons', newS as Sermon);
     }
   },
+  deleteSermon: async (id: string) => {
+    try {
+      const { error } = await supabase.from('sermons').delete().eq('id', id);
+      if (error) throw error;
+    } catch (err) {
+      localStore.deleteOne('sermons', id);
+    }
+  },
 
   // Events
   getEvents: async (): Promise<Event[]> => {
@@ -133,6 +141,14 @@ export const churchService = {
       if (error) throw error;
     } catch (err) {
       localStore.saveOne<Event>('events', newE as Event);
+    }
+  },
+  deleteEvent: async (id: string) => {
+    try {
+      const { error } = await supabase.from('events').delete().eq('id', id);
+      if (error) throw error;
+    } catch (err) {
+      localStore.deleteOne('events', id);
     }
   },
 
@@ -203,6 +219,9 @@ export const churchService = {
     const item = { ...m, id: Math.random().toString(36).substr(2, 9) };
     try { await supabase.from('members').insert([m]); } catch (e) { localStore.saveOne('members', item); }
   },
+  deleteMember: async (id: string) => {
+    try { await supabase.from('members').delete().eq('id', id); } catch (e) { localStore.deleteOne('members', id); }
+  },
 
   getFinance: async (): Promise<FinancialTransaction[]> => {
     try {
@@ -211,6 +230,19 @@ export const churchService = {
       return data || [];
     } catch (err) { return localStore.get<FinancialTransaction>('finance'); }
   },
+  addFinance: async (f: Omit<FinancialTransaction, 'id'>) => {
+    const item = { ...f, id: Math.random().toString(36).substr(2, 9) };
+    try {
+      const { error } = await supabase.from('financial_transactions').insert([f]);
+      if (error) throw error;
+    } catch (e) { localStore.saveOne('finance', item as any); }
+  },
+  deleteFinance: async (id: string) => {
+    try {
+      const { error } = await supabase.from('financial_transactions').delete().eq('id', id);
+      if (error) throw error;
+    } catch (e) { localStore.deleteOne('finance', id); }
+  },
   getSocialActions: async (): Promise<SocialAction[]> => {
     try {
       const { data, error } = await supabase.from('social_actions').select('*').order('date', { ascending: false });
@@ -218,12 +250,38 @@ export const churchService = {
       return data || [];
     } catch (err) { return localStore.get<SocialAction>('social'); }
   },
+  addSocialAction: async (a: Omit<SocialAction, 'id'>) => {
+    const item = { ...a, id: Math.random().toString(36).substr(2, 9) };
+    try {
+      const { error } = await supabase.from('social_actions').insert([a]);
+      if (error) throw error;
+    } catch (e) { localStore.saveOne('social', item as any); }
+  },
+  deleteSocialAction: async (id: string) => {
+    try {
+      const { error } = await supabase.from('social_actions').delete().eq('id', id);
+      if (error) throw error;
+    } catch (e) { localStore.deleteOne('social', id); }
+  },
   getAnnouncements: async (): Promise<Announcement[]> => {
     try {
       const { data, error } = await supabase.from('announcements').select('*').order('date', { ascending: false });
       if (error) throw error;
       return data || [];
     } catch (err) { return localStore.get<Announcement>('announcements'); }
+  },
+  addAnnouncement: async (a: Omit<Announcement, 'id'>) => {
+    const item = { ...a, id: Math.random().toString(36).substr(2, 9) };
+    try {
+      const { error } = await supabase.from('announcements').insert([a]);
+      if (error) throw error;
+    } catch (e) { localStore.saveOne('announcements', item as any); }
+  },
+  deleteAnnouncement: async (id: string) => {
+    try {
+      const { error } = await supabase.from('announcements').delete().eq('id', id);
+      if (error) throw error;
+    } catch (e) { localStore.deleteOne('announcements', id); }
   },
   uploadImage: async (file: File, bucket: string = 'images'): Promise<string> => {
     try {
