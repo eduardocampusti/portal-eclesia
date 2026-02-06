@@ -136,10 +136,10 @@ const PublicLanding: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Navbar */}
-      <nav className="fixed top-0 w-full glass z-50 border-b border-gray-100" style={{ height: 'var(--header-height, 76px)' }}>
+      <header>
         <div className="container h-full flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <img src="/logo.jpg" alt="Logo IPB Brotas" className="h-[36px] md:h-[48px] w-auto object-contain" />
+            <img src="/logo.jpg" alt="Logo IPB Brotas" className="logo" />
             <div className="flex flex-col">
               <span className="font-black text-sm md:text-lg text-[#27432F] leading-tight uppercase tracking-tighter">IPB Brotas</span>
               <span className="text-[8px] md:text-[10px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">Igreja Presbiteriana</span>
@@ -176,21 +176,11 @@ const PublicLanding: React.FC = () => {
             </div>
           </div>
         )}
-      </nav>
+      </header>
 
-      <style>{`
-        :root {
-          --header-height: 76px;
-        }
-        @media (max-width: 768px) {
-          :root {
-            --header-height: 64px;
-          }
-        }
-      `}</style>
 
       {/* Hero */}
-      <section id="inicio" className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section id="inicio" className="hero">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -203,7 +193,7 @@ const PublicLanding: React.FC = () => {
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
 
-        <div className="container relative z-10 py-20">
+        <div className="container heroContent relative z-10 py-20">
           <div className="max-w-3xl space-y-8 animate-in slide-in-from-left duration-700">
             <div className="badge !bg-[#D19E65]/20 !text-[#D19E65] !border !border-[#D19E65]/30">
               <Info size={14} />
@@ -237,14 +227,6 @@ const PublicLanding: React.FC = () => {
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 768px) {
-          #inicio { text-align: center; min-h-screen; }
-          #inicio .container { display: flex; flex-col items-center justify-center; }
-          #inicio .badge { margin: 0 auto; }
-          #inicio .flex-col { width: 100%; }
-        }
-      `}</style>
 
       {/* Próximos Encontros */}
       <TodayAtChurch banners={settings.banners} mode="grid" />
