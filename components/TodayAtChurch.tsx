@@ -127,43 +127,21 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
     return (
         <section id="agenda" className="section bg-white">
             <div className="container">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                    <div className="space-y-4">
-                        <div className="badge">
-                            <Calendar size={12} />
-                            <span>Programação</span>
-                        </div>
-                        <h2 className="!text-[#27432F]">Próximos Encontros</h2>
-                        <p className="text-muted text-elegant font-medium">
-                            Participe de nossa programação regular e cresça na graça e no conhecimento.
-                        </p>
-                    </div>
+                <div className="section-title">
+                    <h2>Próximos Encontros</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {activeSchedule.map((item, idx) => (
-                        <div key={idx} className="card group flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-start">
-                                    <div className="bg-[#27432F]/5 text-[#27432F] px-3 py-1 rounded-lg text-xs font-black uppercase tracking-widest">
-                                        {getWeekdayName(item.day)}
-                                    </div>
-                                    <div className="text-[#D19E65] font-black font-mono text-lg">
-                                        {item.time}
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold text-[#27432F] group-hover:text-[#D19E65] transition-colors">{item.title}</h3>
-                                    <div className="flex items-center gap-2 text-muted text-xs font-bold mt-1 uppercase tracking-widest">
-                                        <MapPin size={12} />
-                                        <span>{item.ministry}</span>
-                                    </div>
-                                </div>
+                        <div key={idx} className="card">
+                            <h3 className="card-title">{item.title}</h3>
+                            <div className="card-info">
+                                <p>{getWeekdayName(item.day)} - {item.time}</p>
+                                <p>{item.ministry}</p>
                             </div>
-                            <div className="mt-8">
-                                <button className="btnAccent w-full flex items-center justify-center gap-2 !py-3 !text-xs">
-                                    <Plus size={16} />
-                                    Adicionar ao Calendário
+                            <div className="mt-auto">
+                                <button className="btnOrange w-full">
+                                    Adicionar ao Calendário <ChevronRight size={14} />
                                 </button>
                             </div>
                         </div>

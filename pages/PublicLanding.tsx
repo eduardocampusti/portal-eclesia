@@ -16,7 +16,9 @@ import {
   Phone,
   Menu,
   X,
-  Flame
+  Flame,
+  Instagram,
+  Twitter
 } from 'lucide-react';
 import { churchService } from '../services/churchService';
 import { Sermon, Event, SiteSettings } from '../types';
@@ -31,17 +33,17 @@ const PublicLanding: React.FC = () => {
   const DEFAULT_SETTINGS: SiteSettings = {
     id: 'default',
     hero_title: 'Igreja Presbiteriana de Brotas de Macaúbas',
-    hero_subtitle: 'Uma Igreja Reformada, Confessante e Bíblica.',
+    hero_subtitle: 'Pureza na Doutrina, Simplicidade no Culto, Santidade na Vida',
     hero_image_url: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1200',
-    mission_title: 'CREMOS NA SOBERANIA DE DEUS',
+    mission_title: 'Sobre Nós',
     mission_description: 'Nossa missão é glorificar a Deus através da proclamação do Evangelho.',
     about_title: 'Nossa História',
-    about_description: 'Filiada à Igreja Presbiteriana do Brasil, mantendo os padrões de fé.',
-    contact_email: 'contato@ipbcentral.org.br',
-    contact_phone: '(11) 3212-4455',
-    contact_address: 'Av. Consolação, 450, São Paulo - SP',
+    about_description: 'Filiada à Igreja Presbiteriana do Brasil, mantendo os padrões de fé e prática das Escrituras Sagradas.',
+    contact_email: 'contato@ipbbrotas.org',
+    contact_phone: '(77) 99999-9999',
+    contact_address: 'Rua Waldemar Falcão, s/n, Brotas de Macaúbas - BA',
     finance_title: 'Contribua com a Obra do Senhor',
-    finance_description: 'Seus dízimos e ofertas sustentam o ministério pastoral, a manutenção do templo e nossas frentes missionárias locais e globais.',
+    finance_description: 'Seus dízimos e ofertas sustentam o ministério pastoral e a manutenção do templo.',
     finance_pix_key: CHURCH_BANK_INFO.pix.key,
     finance_pix_type: CHURCH_BANK_INFO.pix.type,
     finance_pix_holder: CHURCH_BANK_INFO.pix.holder,
@@ -141,39 +143,36 @@ const PublicLanding: React.FC = () => {
           <div className="flex items-center space-x-3">
             <img src="/logo.jpg" alt="Logo IPB Brotas" className="logo" />
             <div className="flex flex-col">
-              <span className="font-black text-sm md:text-lg text-[#27432F] leading-tight uppercase tracking-tighter">IPB Brotas</span>
-              <span className="text-[8px] md:text-[10px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">Igreja Presbiteriana</span>
+              <span className="font-extrabold text-sm md:text-base text-[#27432F] leading-tight uppercase tracking-tight">Igreja Presbiteriana</span>
+              <span className="text-[9px] md:text-[11px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">de Brotas de Macaúbas</span>
             </div>
           </div>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-sm text-[#111827] hover:text-[#27432F] font-bold transition-colors">Sobre</a>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-sm text-[#111827] hover:text-[#27432F] font-bold transition-colors">Programação</a>
-            <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="text-sm text-[#111827] hover:text-[#27432F] font-bold transition-colors">Localização</a>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary !py-2 !px-5 !text-xs">
-              Horários dos Cultos
+          <div className="hidden lg:flex items-center space-x-1">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="nav-link">Sobre</a>
+            <span className="nav-separator">·</span>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="nav-link">Programação</a>
+            <span className="nav-separator">·</span>
+            <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="nav-link">Localização</a>
+          </div>
+
+          <div className="hidden md:block">
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnOrange">
+              Horários dos Cultos <ChevronRight size={14} />
             </a>
           </div>
 
-          {/* Mobile Toggle */}
-          <button className="md:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-[64px] bg-white z-40 animate-in fade-in slide-in-from-top duration-300">
-            <div className="flex flex-col p-6 space-y-6">
-              <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-xl font-bold text-[#111827]">Sobre</a>
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-xl font-bold text-[#111827]">Programação</a>
-              <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="text-xl font-bold text-[#111827]">Localização</a>
-              <a href="#ofertas" onClick={(e) => scrollToSection(e, 'ofertas')} className="text-xl font-bold text-[#111827]">Contribuições</a>
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary w-full justify-center py-4">
-                Horários dos Cultos
-              </a>
-            </div>
+          <div className="lg:hidden fixed inset-0 top-[84px] bg-white z-[110] p-6 flex flex-col space-y-4 shadow-xl">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-xl font-bold">Sobre</a>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-xl font-bold">Programação</a>
+            <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="text-xl font-bold">Localização</a>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnOrange w-full justify-center py-4">Horários dos Cultos</a>
           </div>
         )}
       </header>
@@ -181,49 +180,27 @@ const PublicLanding: React.FC = () => {
 
       {/* Hero */}
       <section id="inicio" className="hero">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={settings.hero_image_url}
-            alt="Fachada da Igreja Presbiteriana de Brotas de Macaúbas"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#27432F]/95 via-[#27432F]/80 to-transparent md:bg-gradient-to-r"></div>
-          <div className="absolute inset-0 bg-black/20"></div>
-        </div>
+        <div className="container">
+          <div className="heroContent">
+            <h1>{settings.hero_title}</h1>
 
-        <div className="container heroContent relative z-10 py-20">
-          <div className="max-w-3xl space-y-8 animate-in slide-in-from-left duration-700">
-            <div className="badge !bg-[#D19E65]/20 !text-[#D19E65] !border !border-[#D19E65]/30">
-              <Info size={14} />
-              <span>{settings.mission_title}</span>
-            </div>
+            <p className="hero-mission">
+              Pureza na Doutrina, <span>Simplicidade no Culto, Santidade na Vida</span>
+            </p>
 
-            <h1 className="text-white !font-black !leading-[1.1]">
-              {settings.hero_title}
-            </h1>
-
-            <div className="space-y-4">
-              <p className="text-[#D19E65] font-black uppercase tracking-[0.2em] text-sm italic">
-                “Pureza na Doutrina, Simplicidade no Culto e Santidade na Vida”
-              </p>
-              <p className="text-gray-100 text-lg md:text-xl font-medium max-w-xl leading-relaxed">
-                {settings.hero_subtitle}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary !py-4 !px-10 justify-center">
-                <span>Ver horários</span>
-                <ChevronRight size={20} />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnPrimary">
+                Ver horários
               </a>
-              <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="btnSecondary !bg-white/10 !text-white !border-white/20 !backdrop-blur-md !py-4 !px-10 justify-center hover:!bg-white/20">
-                <MapPin size={20} />
-                <span>Como chegar</span>
+              <a href="#localizacao" onClick={(e) => scrollToSection(e, 'localizacao')} className="btnSecondary">
+                Como chegar <ChevronRight size={14} />
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="hero-image-side">
+          <img src={settings.hero_image_url} alt="Fachada da Igreja" />
         </div>
       </section>
 
@@ -232,108 +209,114 @@ const PublicLanding: React.FC = () => {
       <TodayAtChurch banners={settings.banners} mode="grid" />
 
       {/* Sobre Nós */}
-      <section id="sobre" className="section bg-[#F7F6F3]">
+      <section id="sobre" className="section bg-white">
         <div className="container">
-          <div className="text-center space-y-4 mb-16">
-            <div className="badge mx-auto">
-              <span>Nossa Essência</span>
-            </div>
-            <h2 className="!text-[#27432F]">{settings.about_title}</h2>
+          <div className="section-title">
+            <h2>Sobre Nós</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="card text-center flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#D19E65]/10 flex items-center justify-center text-[#27432F]">
-                <Cross size={32} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="flex flex-col items-center text-center">
+              <div className="badge-round green-circle">
+                <Flame size={24} />
               </div>
-              <h4 className="text-xl font-bold text-[#27432F]">Nossa Fé</h4>
-              <p className="text-muted text-sm font-medium">
-                Cremos nas Escrituras como única regra de fé e prática, seguindo a tradição reformada.
+              <h3 className="card-title">Nossa Fé</h3>
+              <p className="text-sm leading-relaxed text-[#666]">
+                Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.
               </p>
             </div>
 
-            <div className="card text-center flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#D19E65]/10 flex items-center justify-center text-[#27432F]">
-                <Heart size={32} />
+            <div className="flex flex-col items-center text-center">
+              <div className="badge-round orange-circle">
+                <Cross size={24} />
               </div>
-              <h4 className="text-xl font-bold text-[#27432F]">Nossa Missão</h4>
-              <p className="text-muted text-sm font-medium">
-                {settings.mission_description}
+              <h3 className="card-title">Nossa Missão</h3>
+              <p className="text-sm leading-relaxed text-[#666]">
+                Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.
               </p>
             </div>
 
-            <div className="card text-center flex flex-col items-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#D19E65]/10 flex items-center justify-center text-[#27432F]">
-                <User size={32} />
+            <div className="flex flex-col items-center text-center">
+              <div className="badge-round orange-circle">
+                <User size={24} />
               </div>
-              <h4 className="text-xl font-bold text-[#27432F]">Como Participar</h4>
-              <p className="text-muted text-sm font-medium">
-                Venha nos visitar em nossos cultos e atividades. Todos são bem-vindos para adorar a Deus conosco.
+              <h3 className="card-title">Como Participar</h3>
+              <p className="text-sm leading-relaxed text-[#666]">
+                Entre em contato para eventos, cultos e grupos de estudos.
               </p>
             </div>
           </div>
 
-          <div className="mt-12 text-center">
-            <a href="#historia" className="text-[#27432F] font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 group hover:text-[#D19E65]">
-              Conheça nossa história <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
+          <a href="#" className="center-link">Conheça nossa história {'>'}</a>
         </div>
       </section>
 
       {/* Visite-nos */}
-      <section id="localizacao" className="section bg-white">
+      <section id="localizacao" className="section">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="badge">
-                <MapPin size={14} />
-                <span>Venha nos visitar</span>
-              </div>
-              <h2 className="!text-[#27432F]">Como Chegar</h2>
+          <div className="section-title">
+            <h2>Visite-nos</h2>
+          </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="card !p-6">
-                  <h5 className="font-bold text-[#27432F] mb-1">Endereço</h5>
-                  <p className="text-sm text-muted">{settings.contact_address}</p>
-                </div>
-                <div className="card !p-6">
-                  <h5 className="font-bold text-[#27432F] mb-1">Horários</h5>
-                  <p className="text-sm text-muted">Dom: 09h e 19h<br />Qua: 19h30</p>
-                </div>
-                <div className="card !p-6 sm:col-span-2">
-                  <h5 className="font-bold text-[#27432F] mb-1">Contato</h5>
-                  <p className="text-sm text-muted">{settings.contact_phone}<br />{settings.contact_email}</p>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-10">
+            {/* Sermon Card */}
+            <div className="sermon-big-card">
+              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800" alt="Palavra de Deus" />
+              <div className="sermon-big-overlay">
+                <h3 className="text-2xl font-black mb-4">A Palavra de Deus</h3>
+                <a href="#" className="btnOrange w-fit">Assista ao Sermão {'>'}</a>
               </div>
-
-              <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(settings.contact_address)}`} target="_blank" rel="noopener noreferrer" className="btnPrimary">
-                Abrir no Google Maps
-                <ExternalLink size={18} />
-              </a>
             </div>
 
-            <div className="card !p-0 overflow-hidden !radius-14 shadow-premium h-[280px] md:h-[360px]">
-              <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(settings.contact_address)}`}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-              {/* Note: I'll use a standard embed string if I don't have a key, but for structure this is correct */}
-              <div className="absolute inset-0 bg-gray-100 flex items-center justify-center -z-10">
-                <p className="text-muted text-sm font-medium">Carregando mapa...</p>
+            {/* Contact Info Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="contact-item">
+                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
+                  <MapPin size={14} />
+                  <h4>Endereço</h4>
+                </div>
+                <p>{settings.contact_address}</p>
+              </div>
+
+              <div className="contact-item">
+                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
+                  <Clock size={14} />
+                  <h4>Horários</h4>
+                </div>
+                <p>Dom: 09h00 & 19h00</p>
+                <p>Qua: 19h30</p>
+              </div>
+
+              <div className="contact-item">
+                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
+                  <Phone size={14} />
+                  <h4>Telefone</h4>
+                </div>
+                <p>{settings.contact_phone}</p>
+              </div>
+
+              <div className="contact-item">
+                <div className="flex items-center gap-2 text-[#D19E65] mb-1">
+                  <Mail size={14} />
+                  <h4>E-mail</h4>
+                </div>
+                <p>{settings.contact_email}</p>
+              </div>
+
+              <div className="col-span-2 mt-2 h-40 rounded-lg overflow-hidden border border-border">
+                <iframe
+                  title="Mapa de Localização"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.9687799480135!2d-42.631!3d-12.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAwLjAiUyA0MsKwMzgnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                ></iframe>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Agenda Viva */}
-      <TodayAtChurch banners={settings.banners} mode="live" />
 
       {/* Contribua */}
       <section id="ofertas" className="section bg-white">
@@ -494,44 +477,33 @@ const PublicLanding: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#27432F] pt-20 pb-10 text-white/80">
+      <footer>
         <div className="container">
-          <div className="grid md:grid-cols-3 gap-12 mb-16">
-            <div className="space-y-6">
-              <div className="flex items-center space-x-3 text-white">
-                <img src="/logo.jpg" alt="Logo da Igreja Presbiteriana de Brotas de Macaúbas" className="h-12 w-auto object-contain brightness-0 invert opacity-90" loading="lazy" />
-                <div className="flex flex-col">
-                  <span className="font-black text-xl uppercase tracking-tighter">IPB Brotas</span>
-                  <span className="text-[10px] font-bold text-[#D19E65] uppercase tracking-widest">Portal Eclésia</span>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed max-w-sm">
-                {settings.about_description.substring(0, 150)}...
-              </p>
-            </div>
+          <div className="footer-socials">
+            <a href="#" className="footer-social-icon"><Instagram size={20} /></a>
+            <a href="#" className="footer-social-icon"><Twitter size={20} /></a>
+            <a href="#" className="footer-social-icon"><Youtube size={20} /></a>
+          </div>
 
-            <div className="space-y-6">
-              <h5 className="text-white font-bold uppercase tracking-widest text-xs">Acesso Rápido</h5>
-              <div className="flex flex-col space-y-3 text-sm">
-                <a href="#sobre" className="hover:text-[#D19E65] transition-colors">Sobre Nós</a>
-                <a href="#agenda" className="hover:text-[#D19E65] transition-colors">Programação</a>
-                <a href="#localizacao" className="hover:text-[#D19E65] transition-colors">Localização</a>
-                <a href="#ofertas" className="hover:text-[#D19E65] transition-colors">Contribuições</a>
-              </div>
+          <div className="footer-grid">
+            <div className="footer-col">
+              <h4>Nosso Endereço</h4>
+              <p>{settings.contact_address}</p>
             </div>
-
-            <div className="space-y-6">
-              <h5 className="text-white font-bold uppercase tracking-widest text-xs">Administração</h5>
-              <Link to="/login" className="btnSecondary !bg-white/5 !text-white !border-white/10 !py-2 !px-4 !text-xs hover:!bg-white/10">
+            <div className="footer-col">
+              <h4>Horários dos Cultos</h4>
+              <p>Domingo - 09h00 & 19h00<br />Quarta-feira - 19h30</p>
+            </div>
+            <div className="footer-col">
+              <h4>Fale Conosco</h4>
+              <p>{settings.contact_phone}<br />{settings.contact_email}</p>
+            </div>
+            <div className="footer-col">
+              <h4>Administração</h4>
+              <Link to="/login" className="text-white h-8 w-fit bg-white/10 px-4 flex items-center rounded text-xs hover:bg-white/20">
                 Painel Administrativo
               </Link>
             </div>
-          </div>
-
-          <div className="pt-8 border-t border-white/10 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-              © {new Date().getFullYear()} Igreja Presbiteriana de Brotas de Macaúbas. Todos os direitos reservados.
-            </p>
           </div>
         </div>
       </footer>
