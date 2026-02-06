@@ -195,8 +195,9 @@ const PublicLanding: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={settings.hero_image_url}
-            alt="Fachada IPB Brotas"
+            alt="Fachada da Igreja Presbiteriana de Brotas de Macaúbas"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#27432F]/95 via-[#27432F]/80 to-transparent md:bg-gradient-to-r"></div>
           <div className="absolute inset-0 bg-black/20"></div>
@@ -516,7 +517,7 @@ const PublicLanding: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div className="space-y-6">
               <div className="flex items-center space-x-3 text-white">
-                <img src="/logo.jpg" alt="Logo" className="h-12 w-auto object-contain brightness-0 invert opacity-90" />
+                <img src="/logo.jpg" alt="Logo da Igreja Presbiteriana de Brotas de Macaúbas" className="h-12 w-auto object-contain brightness-0 invert opacity-90" loading="lazy" />
                 <div className="flex flex-col">
                   <span className="font-black text-xl uppercase tracking-tighter">IPB Brotas</span>
                   <span className="text-[10px] font-bold text-[#D19E65] uppercase tracking-widest">Portal Eclésia</span>

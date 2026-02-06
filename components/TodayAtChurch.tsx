@@ -74,7 +74,7 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
                             ) : (
                                 <div className="p-12 h-full flex flex-col justify-center items-center text-center bg-[#D19E65]/05">
                                     <Flame className="text-[#D19E65] mb-4" size={48} />
-                                    <h4 className="font-bold text-[#27432F]">Fique por dentro</h4>
+                                    <h3 className="font-bold text-[#27432F]">Fique por dentro</h3>
                                     <p className="text-muted text-sm">Acompanhe nossas redes sociais para avisos em tempo real.</p>
                                 </div>
                             )}
@@ -82,7 +82,7 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
 
                         {/* Today's Special Aviso */}
                         <div className="card !bg-[#D19E65]/10 !border-[#D19E65]/20 flex flex-col justify-center p-8 md:p-12">
-                            <h4 className="text-[#27432F] font-black uppercase tracking-widest text-xs mb-4">Aviso Importante</h4>
+                            <h3 className="text-[#27432F] font-black uppercase tracking-widest text-xs mb-4">Aviso Importante</h3>
                             {isPrayerWeek ? (
                                 <div className="space-y-4">
                                     <h3 className="text-2xl font-bold text-[#27432F]">Semana de Oração</h3>
@@ -153,7 +153,7 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
                                     </div>
                                 </div>
                                 <div>
-                                    <h4 className="text-xl font-bold text-[#27432F] group-hover:text-[#D19E65] transition-colors">{item.title}</h4>
+                                    <h3 className="text-xl font-bold text-[#27432F] group-hover:text-[#D19E65] transition-colors">{item.title}</h3>
                                     <div className="flex items-center gap-2 text-muted text-xs font-bold mt-1 uppercase tracking-widest">
                                         <MapPin size={12} />
                                         <span>{item.ministry}</span>

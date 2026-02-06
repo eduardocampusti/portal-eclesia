@@ -40,6 +40,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ banners }) => {
                                 src={banner.imageUrl}
                                 alt={banner.title}
                                 className="w-full h-full object-cover"
+                                loading="lazy"
                             />
                             {/* Gradient only if there is text content, otherwise clean image */}
                             {(banner.title || banner.subtitle) && (
