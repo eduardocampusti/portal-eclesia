@@ -9,7 +9,7 @@ import { User, RoleType } from './types';
 import { supabase } from './services/supabaseClient';
 import PublicLanding from './pages/PublicLanding';
 import AdminLayout from './components/Layout';
-import Login from './pages/Login';
+import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import SermonsManager from './pages/SermonsManager';
 import EventsManager from './pages/EventsManager';
@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
   const router = useMemo(() => createHashRouter([
     { path: "/", element: <PublicLanding /> },
-    { path: "/login", element: <Login /> },
+    { path: "/login", element: <LoginPage /> },
     {
       path: "/admin",
       element: <AdminLayout />,
