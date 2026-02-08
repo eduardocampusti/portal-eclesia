@@ -237,6 +237,14 @@ p {
   color: var(--orange);
 }
 
+.navSeparator {
+  width: 3px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
 /* Hero Section (Full Overlay) */
 .hero {
   position: relative;
@@ -295,12 +303,12 @@ p {
   background: #fff;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  padding: 40px;
+  padding: 0;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
   height: 100%;
-  box-shadow: var(--shadow-subtle);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .eventCard::after {
