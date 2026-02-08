@@ -21,13 +21,15 @@
   --surface: #fff;
   --text: #111827;
   --text-muted: #64748b;
-  --border: rgba(17, 24, 39, .1);
-  --shadow: 0 10px 40px rgba(0, 0, 0, .05);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, .1);
-  --radius: 12px;
+  --border: rgba(17, 24, 39, .08);
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --shadow-premium: 0 20px 50px rgba(39, 67, 47, 0.08);
+  --shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --radius: 16px;
   --container: 1140px;
-  --pad: 24px;
+  --pad: 32px;
   --nav-height: 90px;
+  --transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 * {
@@ -134,49 +136,54 @@ p {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  font-weight: 600;
-  font-size: 15px;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: var(--transition);
   cursor: pointer;
   text-decoration: none;
-  border-radius: 8px;
-  padding: 14px 28px;
+  border-radius: 99px;
+  padding: 16px 32px;
 }
 
 .btnPrimary {
   background: var(--green);
   color: #fff !important;
   border: none;
+  box-shadow: 0 10px 30px rgba(39, 67, 47, 0.15);
 }
 
 .btnPrimary:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.2);
-  box-shadow: 0 10px 25px rgba(39, 67, 47, 0.3);
+  transform: translateY(-4px);
+  background: var(--green-dark);
+  box-shadow: 0 15px 40px rgba(39, 67, 47, 0.25);
 }
 
 .btnSecondary {
   background: #fff;
-  color: var(--text) !important;
+  color: var(--green) !important;
   border: 1px solid var(--border);
 }
 
 .btnSecondary:hover {
   background: var(--bg);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  border-color: var(--green);
 }
 
 .btnAccent {
   background: var(--orange);
   color: #fff !important;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 28px;
+  box-shadow: 0 10px 30px rgba(209, 158, 101, 0.2);
 }
 
 .btnAccent:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   filter: brightness(1.1);
-  box-shadow: 0 10px 30px rgba(209, 158, 101, 0.4);
+  box-shadow: 0 15px 40px rgba(209, 158, 101, 0.3);
 }
 
 /* Header Sticky */
@@ -286,59 +293,75 @@ p {
 /* Cards Estilo Imagem 2/3 */
 .eventCard {
   background: #fff;
-  border-radius: 8px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
-  padding: 32px;
-  transition: all 0.4s;
+  padding: 40px;
+  transition: var(--transition);
   position: relative;
   overflow: hidden;
   height: 100%;
+  box-shadow: var(--shadow-subtle);
 }
 
 .eventCard::after {
   content: "";
   position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 160px;
-  height: 160px;
+  bottom: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
   background-image: url('/hero.jpg');
   background-size: cover;
-  opacity: 0.15;
+  opacity: 0.05;
   border-radius: 50%;
   pointer-events: none;
+  transition: var(--transition);
 }
 
 .eventCard:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--orange);
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-premium);
+  border-color: rgba(209, 158, 101, 0.3);
+}
+
+.eventCard:hover::after {
+  opacity: 0.1;
+  transform: scale(1.1);
 }
 
 /* Sobre Nós (Cards Bege) */
 .infoCard {
-  background: var(--card-bg);
-  border-radius: 8px;
-  padding: 48px 32px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 56px 40px;
   text-align: center;
-  transition: 0.3s;
+  transition: var(--transition);
   height: 100%;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-subtle);
 }
 
 .infoCard:hover {
-  background: #ece9e2;
+  background: var(--card-bg);
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-premium);
 }
 
 .circleIcon {
   width: 80px;
   height: 80px;
-  background: var(--orange);
+  background: linear-gradient(135deg, var(--orange), #e2b380);
   color: #fff;
-  border-radius: 50%;
+  border-radius: 24px;
   display: grid;
   place-items: center;
   margin: 0 auto 32px;
-  box-shadow: 0 10px 20px rgba(209, 158, 101, 0.2);
+  box-shadow: 0 15px 30px rgba(209, 158, 101, 0.25);
+  transition: var(--transition);
+}
+
+.infoCard:hover .circleIcon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 /* Visite-nos Section */

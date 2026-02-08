@@ -32,14 +32,14 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
             {activeSchedule.map((item, idx) => (
                 <div key={idx} className="eventCard group">
                     <div className="flex flex-col h-full">
-                        <span className="text-[10px] font-black uppercase text-orange tracking-[0.2em] mb-2">{item.ministry}</span>
-                        <h3 className="!text-2xl !font-bold mb-6 group-hover:text-orange transition-colors">{item.title}</h3>
+                        <span className="text-[11px] font-black uppercase text-orange tracking-[0.25em] mb-4">{item.ministry}</span>
+                        <h3 className="!text-3xl !font-bold mb-8 group-hover:text-orange transition-colors duration-500 leading-tight">{item.title}</h3>
 
-                        <div className="mt-auto pt-6 border-t border-slate-50">
-                            <p className="!text-[#27432F] !font-bold !text-sm flex items-center gap-2 mb-6">
-                                <Clock size={14} className="text-orange" /> {getWeekdayName(item.day)} às {item.time}
+                        <div className="mt-auto pt-8 border-t border-slate-100/50">
+                            <p className="!text-[#27432F] !font-bold !text-base flex items-center gap-3 mb-8">
+                                <Clock size={16} className="text-orange" /> {getWeekdayName(item.day)} às {item.time}
                             </p>
-                            <button className="btnAccent w-full !rounded-xl !py-4 shadow-lg shadow-orange/10 hover:shadow-orange/20">
+                            <button className="btnAccent w-full !rounded-2xl !py-5 shadow-xl shadow-orange/10 hover:shadow-orange/30 transition-all duration-500 font-bold uppercase tracking-widest text-[11px]">
                                 Adicionar ao Calendário
                             </button>
                         </div>

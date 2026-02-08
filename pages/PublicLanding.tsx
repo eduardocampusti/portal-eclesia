@@ -145,8 +145,8 @@ const PublicLanding: React.FC = () => {
       <section className="hero">
         <div className="container">
           <div className="heroContent animate-in fade-in slide-in-from-left duration-1000">
-            <h1 className="mb-8">Igreja Presbiteriana de Brotas de Macaúbas</h1>
-            <p className="heroSub">
+            <h1 className="mb-8 tracking-tight !leading-[1.05]">Igreja Presbiteriana de Brotas de Macaúbas</h1>
+            <p className="heroSub text-xl !font-medium !italic tracking-wide">
               Pureza na Doutrina, Simplicidade no Culto, Santidade na Vida.
             </p>
             <div className="flex flex-wrap gap-4 mt-12">
@@ -164,10 +164,10 @@ const PublicLanding: React.FC = () => {
       {/* Agenda - Próximos Encontros */}
       <section id="agenda" className="section bg-white">
         <div className="container">
-          <div className="mb-12">
-            <span className="kicker">Comunhão</span>
-            <h2>Próximos Encontros</h2>
-            <p>Acompanhe nossas atividades e participe conosco em adoração.</p>
+          <div className="mb-16 text-center">
+            <span className="kicker !mb-4">Comunhão</span>
+            <h2 className="!text-5xl mb-4">Próximos Encontros</h2>
+            <p className="max-w-2xl mx-auto text-lg">Acompanhe nossas atividades e participe conosco em adoração.</p>
           </div>
           <TodayAtChurch mode="grid" />
         </div>
@@ -180,21 +180,21 @@ const PublicLanding: React.FC = () => {
             <h2>Sobre Nós</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="infoCard">
-              <div className="circleIcon"><Compass size={32} /></div>
-              <h3>Nossa Fé</h3>
-              <p className="text-sm">Nossa doutrina fundamental baseia-se puramente nas Escrituras Sagradas.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="infoCard group">
+              <div className="circleIcon"><Compass size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-3xl">Nossa Fé</h3>
+              <p className="text-base leading-loose">Nossa doutrina fundamental baseia-se puramente nas Escrituras Sagradas.</p>
             </div>
-            <div className="infoCard">
-              <div className="circleIcon"><Flame size={32} /></div>
-              <h3>Nossa Missão</h3>
-              <p className="text-sm">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
+            <div className="infoCard group">
+              <div className="circleIcon"><Flame size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-3xl">Nossa Missão</h3>
+              <p className="text-base leading-loose">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
             </div>
-            <div className="infoCard">
-              <div className="circleIcon"><User size={32} /></div>
-              <h3>Como Participar</h3>
-              <p className="text-sm">Entre em contato para eventos, cultos e grupos de estudos.</p>
+            <div className="infoCard group">
+              <div className="circleIcon"><User size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-3xl">Como Participar</h3>
+              <p className="text-base leading-loose">Entre em contato para eventos, cultos e grupos de estudos.</p>
             </div>
           </div>
 
@@ -215,16 +215,16 @@ const PublicLanding: React.FC = () => {
           <div className="grid grid12 gap-12 items-start">
             {/* Esquerda: Sermon/Video */}
             <div className="lg:col-span-7 col-span-12">
-              <div className="sermonCard group">
-                <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="playOverlay">
-                  <div className="text-center">
-                    <div className="playButton mx-auto mb-6 shadow-xl shadow-green/20 group-hover:scale-110 transition-transform">
-                      <Mic2 size={32} fill="currentColor" />
+              <div className="sermonCard group !rounded-3xl border border-white/10">
+                <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                <div className="playOverlay !bg-green/40 backdrop-blur-[2px] group-hover:backdrop-blur-sm transition-all duration-500">
+                  <div className="text-center p-8">
+                    <div className="playButton mx-auto mb-8 shadow-2xl shadow-green/40 group-hover:scale-110 !w-20 !h-20">
+                      <Mic2 size={36} fill="currentColor" />
                     </div>
-                    <h4 className="text-white text-3xl font-bold mb-6">A Palavra de Deus</h4>
-                    <button className="btn btnPrimary !bg-white !text-[#27432F] hover:!bg-orange hover:!text-white border-none shadow-lg">
-                      Assista ao Sermão ›
+                    <h4 className="text-white text-4xl font-bold mb-8 tracking-tight">Assista aos nossos Cultos</h4>
+                    <button className="btn !bg-white !text-green hover:!bg-orange hover:!text-white border-none shadow-xl transition-all duration-500 font-bold uppercase tracking-widest text-[10px] px-8 py-4">
+                      Ver no Youtube ›
                     </button>
                   </div>
                 </div>
