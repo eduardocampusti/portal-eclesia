@@ -1,9 +1,9 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* 
-  PORTAL Eclésia - SENIOR DESIGN SYSTEM
+  PORTAL EclÃ©sia - SENIOR DESIGN SYSTEM
   Refactoring: Institutional, Premium, Minimalist
 */
 
@@ -49,7 +49,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Tipografia Estratégica */
+/* Tipografia EstratÃ©gica */
 h1,
 h2,
 h3,
@@ -130,7 +130,7 @@ p {
   }
 }
 
-/* Botões Estilo Imagem */
+/* BotÃµes Estilo Imagem */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -337,7 +337,7 @@ p {
   transform: scale(1.1);
 }
 
-/* Sobre Nós (Cards Bege) */
+/* Sobre NÃ³s (Cards Bege) */
 .infoCard {
   background: var(--surface);
   border-radius: var(--radius);
@@ -615,36 +615,35 @@ footer {
     font-size: 24px;
   }
 }
- / *   F i d e l i d a d e   E x t r a   * / 
- . i n f o I c o n B o x   { 
-     w i d t h :   5 2 p x ; 
-     h e i g h t :   5 2 p x ; 
-     b a c k g r o u n d :   # f f f ; 
-     b o r d e r - r a d i u s :   1 2 p x ; 
-     d i s p l a y :   f l e x ; 
-     a l i g n - i t e m s :   c e n t e r ; 
-     j u s t i f y - c o n t e n t :   c e n t e r ; 
-     b o x - s h a d o w :   0   4 p x   1 2 p x   r g b a ( 0 , 0 , 0 , 0 . 0 3 ) ; 
-     c o l o r :   v a r ( - - o r a n g e ) ; 
-     f l e x - s h r i n k :   0 ; 
- } 
- 
- . v i s i t G r i d   { 
-     d i s p l a y :   g r i d ; 
-     g r i d - t e m p l a t e - c o l u m n s :   1 . 5 f r   1 f r   1 f r ; 
-     g a p :   3 2 p x ; 
- } 
- 
- @ m e d i a   ( m a x - w i d t h :   1 1 0 0 p x )   { 
-     . v i s i t G r i d   { 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r   1 f r ; 
-     } 
- } 
- 
- @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
-     . v i s i t G r i d   { 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-     } 
- } 
-  
- 
+
+/* Fidelidade Extra */
+.infoIconBox {
+  width: 52px;
+  height: 52px;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.visitGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 1100px) {
+  .visitGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .visitGrid {
+    grid-template-columns: 1fr;
+  }
+}
