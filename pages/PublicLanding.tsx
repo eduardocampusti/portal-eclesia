@@ -30,6 +30,7 @@ import TodayAtChurch from '../components/TodayAtChurch';
 
 const PublicLanding: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [sermons, setSermons] = useState<Sermon[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
 
@@ -98,12 +99,19 @@ const PublicLanding: React.FC = () => {
       }
     };
     fetchData();
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="landing bg-[#FBFBFA]">
       {/* Header Institucional (Design Match) */}
-      <header className="header">
+      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="container headerInner">
           <Link to="/" className="logoArea">
             <img src="/logo.jpg" alt="Logo IPB" />
