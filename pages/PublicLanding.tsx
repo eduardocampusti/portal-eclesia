@@ -263,12 +263,13 @@ const PublicLanding: React.FC = () => {
 
               <div className="rounded-xl overflow-hidden h-40 border border-slate-100 shadow-sm relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m13!1m3!1d3861.1502493325605!2d-42.6288!3d-12.0007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAyLjUiUyA0MsKwMzgnMDQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                  src="https://maps.google.com/maps?q=Igreja%20Presbiteriana%20Brotas%20de%20Macaúbas%20Rua%20Waldemar%20Falcão&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen={true}
                   loading="lazy"
+                  title="Mapa de Localização"
                 ></iframe>
                 <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-black/5 rounded-xl"></div>
               </div>
