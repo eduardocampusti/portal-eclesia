@@ -130,6 +130,41 @@ const PublicLanding: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay (Design Match) */}
+        {isMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-[1000] bg-white animate-in slide-in-from-top duration-300">
+            <div className="container py-8">
+              <div className="flex justify-between items-center mb-8 pb-4 border-bottom border-slate-100">
+                <Link to="/" className="logoArea" onClick={() => setIsMenuOpen(false)}>
+                  <img src="/logo.jpg" alt="Logo IPB" className="h-10 w-auto" />
+                  <div className="flex flex-col ml-3 text-left">
+                    <span className="font-extrabold text-sm text-[#27432F] leading-none uppercase">Igreja Presbiteriana</span>
+                    <span className="text-[8px] font-bold text-[#D19E65] uppercase tracking-wider">Brotas de Macaúbas</span>
+                  </div>
+                </Link>
+                <button onClick={() => setIsMenuOpen(false)} className="p-2 text-[#27432F] hover:bg-slate-50 rounded-full transition-colors">
+                  <X size={32} />
+                </button>
+              </div>
+              <nav className="flex flex-col gap-6 text-2xl font-bold text-[#27432F]">
+                <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="hover:text-orange transition-colors">Sobre</a>
+                <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="hover:text-orange transition-colors">Programação</a>
+                <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="hover:text-orange transition-colors">Localização</a>
+
+                <div className="border-t border-slate-100 my-4" />
+
+                <Link
+                  to="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="btnAccent !py-4 !px-6 text-center text-base rounded-xl shadow-lg shadow-orange/20"
+                >
+                  Acessar Sistema
+                </Link>
+              </nav>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section (Design Match) */}
