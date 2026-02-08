@@ -294,9 +294,9 @@ const PublicLanding: React.FC = () => {
           <div className="footerGrid">
             <div className="footerCol">
               <h4>Nosso Endereço</h4>
-              <p className="flex items-center gap-2">
-                <MapPin size={14} /> Rua Waldemar Falcão, s/n<br />
-                Brotas de Macaúbas - BA
+              <p className="flex items-start gap-2">
+                <MapPin size={16} className="text-orange mt-1 shrink-0" />
+                <span>Rua Waldemar Falcão, s/n<br />Brotas de Macaúbas - BA</span>
               </p>
             </div>
             <div className="footerCol">
@@ -306,13 +306,18 @@ const PublicLanding: React.FC = () => {
             </div>
             <div className="footerCol">
               <h4>Fale Conosco</h4>
-              <p>(77) 99994-9999</p>
-              <p>contato@ipbbrotas.org</p>
+              <p className="flex items-center gap-2">
+                <Phone size={16} className="text-orange" /> (77) 99999-9999
+              </p>
             </div>
             <div className="footerCol">
-              <h4>Redes Sociais</h4>
-              <p>Siga-nos no Instagram</p>
-              <p>Assista no Youtube</p>
+              <h4>Fale Conosco</h4>
+              <p className="flex items-center gap-2">
+                <Phone size={16} className="text-orange" /> (77) 99999-9999
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail size={16} className="text-orange" /> contato@ipbrotas.com.br
+              </p>
             </div>
           </div>
 
