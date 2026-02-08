@@ -81,6 +81,10 @@ p {
   line-height: 1.7;
 }
 
+.landing {
+  padding-top: var(--nav-height);
+}
+
 /* Layout Geral */
 .container {
   max-width: var(--container);
@@ -191,8 +195,10 @@ p {
   height: var(--nav-height);
   background: #fff;
   border-bottom: 1px solid var(--border);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
   display: flex;
   align-items: center;
