@@ -427,7 +427,7 @@ p {
 
 /* Cards Premium Revisitados */
 .card {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
@@ -442,8 +442,8 @@ p {
 }
 
 .cardIcon {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   border-radius: 18px;
   background: var(--bg);
   color: var(--green);

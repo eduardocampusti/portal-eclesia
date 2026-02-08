@@ -164,8 +164,10 @@ const PublicLanding: React.FC = () => {
       {/* Agenda - Próximos Encontros */}
       <section id="agenda" className="section bg-white">
         <div className="container">
-          <div className="sectionTitle">
+          <div className="mb-12">
+            <span className="kicker">Comunhão</span>
             <h2>Próximos Encontros</h2>
+            <p>Acompanhe nossas atividades e participe conosco em adoração.</p>
           </div>
           <TodayAtChurch mode="grid" />
         </div>
@@ -322,3 +324,5 @@ const PublicLanding: React.FC = () => {
 };
 
 export default PublicLanding;
+
+

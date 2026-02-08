@@ -47,6 +47,10 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
                 </div>
             ))}
         </div>
+                    </div >
+                </div >
+            ))}
+        </div >
     );
 };
 
