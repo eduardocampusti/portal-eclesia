@@ -36,7 +36,7 @@ const PublicLanding: React.FC = () => {
     id: 'default',
     hero_title: 'Igreja Presbiteriana de Brotas de Macaúbas',
     hero_subtitle: 'Uma comunidade de fé reformada, servindo ao Senhor com alegria.',
-    hero_image_url: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1200',
+    hero_image_url: '/hero.jpg',
     mission_title: 'Sobre Nós',
     mission_description: 'Nossa missão é glorificar a Deus através da proclamação do Evangelho.',
     about_title: 'Nossa História',
@@ -100,33 +100,29 @@ const PublicLanding: React.FC = () => {
   }, []);
 
   return (
-    <div className="landing">
-      {/* Header Premium */}
+    <div className="landing bg-[#FBFBFA]">
+      {/* Header Institucional (Design Match) */}
       <header className="header">
         <div className="container headerInner">
-          <div className="logoArea">
+          <Link to="/" className="logoArea">
             <img src="/logo.jpg" alt="Logo IPB" />
             <div className="flex flex-col">
-              <span className="font-extrabold text-sm text-[#1F4D35] leading-tight uppercase tracking-tight">Igreja Presbiteriana</span>
-              <span className="text-[10px] font-bold text-[#D29E65] uppercase tracking-widest leading-none">de Brotas de Macaúbas</span>
+              <span className="font-extrabold text-lg text-[#27432F] leading-tight uppercase tracking-tight">IPB Brotas</span>
+              <span className="text-[10px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">Presbiteriana</span>
             </div>
-          </div>
+          </Link>
 
-          <nav className="navMenu">
-            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')}>Nossa Fé</a>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')}>Agenda</a>
+          <nav className="navMenu hidden lg:flex">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')}>Sobre</a>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')}>Programação</a>
             <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')}>Localização</a>
-            <a href="#ofertas" onClick={(e) => scrollToSection(e, 'ofertas')}>Ofertas</a>
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/login" className="btn btnSoft hidden md:inline-flex">
-              Entrar
-            </Link>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary hidden md:inline-flex">
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent hidden md:inline-flex">
               Horários dos Cultos
             </a>
-            <button className="lg:hidden p-2 text-[#1F4D35]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
@@ -134,263 +130,190 @@ const PublicLanding: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-[80px] bg-white z-[110] p-8 flex flex-col gap-6 shadow-2xl animate-fade-in">
-            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-2xl font-bold text-[#1F4D35]">Nossa Fé</a>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-2xl font-bold text-[#1F4D35]">Agenda Semanal</a>
-            <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="text-2xl font-bold text-[#1F4D35]">Onde Estamos</a>
-            <a href="#ofertas" onClick={(e) => scrollToSection(e, 'ofertas')} className="text-2xl font-bold text-[#1F4D35]">Contribuições</a>
-            <div className="mt-4 pt-6 border-t border-slate-100 flex flex-col gap-4">
-              <Link to="/login" className="btn btnSoft w-full">Entrar na Área Restrita</Link>
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary w-full">Horários dos Cultos</a>
+          <div className="lg:hidden fixed inset-0 top-[90px] bg-white z-[110] p-8 flex flex-col gap-6 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-2xl font-bold text-[#27432F]">Sobre a IPB</a>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-2xl font-bold text-[#27432F]">Programação</a>
+            <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="text-2xl font-bold text-[#27432F]">Localização</a>
+            <div className="mt-4 pt-6 border-t border-slate-100">
+              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent w-full">Horários dos Cultos</a>
             </div>
           </div>
         )}
       </header>
 
-      {/* Hero Premium */}
-      <section className="section hero">
+      {/* Hero Section (Design Match) */}
+      <section className="hero">
         <div className="container">
-          <div className="heroContent">
-            <div className="heroText">
-              <div className="kicker">
-                <Flame size={14} />
-                <span>Uma Igreja Reformada e Bíblica</span>
-              </div>
-              <h1>{settings.hero_title}</h1>
-              <p className="mt-8 mb-10 text-lg">
-                Seja bem-vindo à nossa casa. <span className="text-[#D29E65] font-bold">Simplicidade no Culto, Santidade na Vida e Fidelidade às Escrituras.</span>
-              </p>
-              <div className="heroActions flex gap-4">
-                <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary">
-                  Ver Programação
-                </a>
-                <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="btn btnSecondary">
-                  Como Chegar <ChevronRight size={18} />
-                </a>
-              </div>
-            </div>
-            <div className="heroMedia">
-              <img src={settings.hero_image_url} alt="Nossa Igreja" />
+          <div className="heroContent animate-in fade-in slide-in-from-left duration-1000">
+            <h1 className="mb-8">Igreja Presbiteriana de Brotas de Macaúbas</h1>
+            <p className="heroSub">
+              Pureza na Doutrina, Simplicidade no Culto, Santidade na Vida.
+            </p>
+            <div className="flex flex-wrap gap-4 mt-12">
+              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary !px-10">
+                Ver horários
+              </a>
+              <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="btn btnSecondary !px-10 font-bold">
+                Como chegar <ChevronRight size={18} className="ml-1" />
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Próximos Encontros */}
+      {/* Agenda - Próximos Encontros */}
       <section id="agenda" className="section bg-white">
         <div className="container">
-          <div className="mb-12">
-            <span className="kicker">Comunhão</span>
+          <div className="sectionTitle">
             <h2>Próximos Encontros</h2>
-            <p>Acompanhe nossas atividades e participe conosco em adoração.</p>
           </div>
-          <TodayAtChurch banners={settings.banners} mode="grid" />
+          <TodayAtChurch mode="grid" />
         </div>
       </section>
 
-      {/* Sobre Nós */}
-      <section id="sobre" className="section">
+      {/* Sobre Nós (Design Match Cards) */}
+      <section id="sobre" className="section bg-[#FBFBFA]">
         <div className="container">
-          <div className="mb-12 text-center max-w-2xl mx-auto flex flex-col items-center">
-            <span className="kicker !mb-4">Identidade</span>
-            <h2>Nossas Raízes</h2>
-            <p>Mantendo a tradição presbiteriana com foco na centralidade de Cristo e na autoridade das Escrituras.</p>
+          <div className="sectionTitle">
+            <h2>Sobre Nós</h2>
           </div>
 
-          <div className="grid grid3">
-            <div className="card">
-              <div className="cardIcon"><Cross size={28} /></div>
-              <h3 className="cardTitle">Nossa Fé</h3>
-              <p className="text-sm">Baseamos nossa fé nas Escrituras Sagradas, crendo que a Bíblia é a única regra infalível de fé e prática.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="infoCard">
+              <div className="circleIcon"><Compass size={32} /></div>
+              <h3>Nossa Fé</h3>
+              <p className="text-sm">Nossa doutrina fundamental baseia-se puramente nas Escrituras Sagradas.</p>
             </div>
-            <div className="card">
-              <div className="cardIcon"><Compass size={28} /></div>
-              <h3 className="cardTitle">Nossa Missão</h3>
-              <p className="text-sm">Proclamar o Evangelho de Jesus Cristo, fazendo discípulos e servindo a nossa cidade de Brotas.</p>
+            <div className="infoCard">
+              <div className="circleIcon"><Flame size={32} /></div>
+              <h3>Nossa Missão</h3>
+              <p className="text-sm">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
             </div>
-            <div className="card">
-              <div className="cardIcon"><User size={28} /></div>
-              <h3 className="cardTitle">Como Participar</h3>
-              <p className="text-sm">Seja em nossos cultos, estudos bíblicos ou pequenos grupos, há sempre um lugar para você.</p>
+            <div className="infoCard">
+              <div className="circleIcon"><User size={32} /></div>
+              <h3>Como Participar</h3>
+              <p className="text-sm">Entre em contato para eventos, cultos e grupos de estudos.</p>
             </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="#sobre" className="text-green font-bold text-lg inline-flex items-center gap-2 hover:gap-4 transition-all group">
+              Conheça nossa história <ChevronRight size={20} className="text-orange" />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Visite-nos */}
       <section id="visite" className="section bg-white">
         <div className="container">
-          <div className="mb-12">
-            <span className="kicker">Conveniência</span>
-            <h2>Onde nos encontrar</h2>
+          <div className="sectionTitle">
+            <h2>Visite-nos</h2>
           </div>
 
-          <div className="visitArea">
-            <div className="flex flex-col gap-6">
-              <div className="card">
-                <span className="kicker !bg-slate-50">Localização</span>
-                <h4 className="cardTitle text-lg">Templo Principal</h4>
-                <p className="text-sm">{settings.contact_address}</p>
-                <div className="flex items-center gap-2 text-sm font-bold text-[#D29E65]">
-                  <MapPin size={16} /> Ver no mapa abaixo
-                </div>
-              </div>
-
-              <div className="card">
-                <span className="kicker !bg-slate-50">Horários Centrais</span>
-                <div className="mt-2 space-y-3">
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="font-semibold text-slate-700">Domingo Manhã (EBD)</span>
-                    <span className="text-[#1F4D35] font-bold">09h00</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="font-semibold text-slate-700">Domingo Noite (Culto)</span>
-                    <span className="text-[#1F4D35] font-bold">19h00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-semibold text-slate-700">Quarta-feira (Oração)</span>
-                    <span className="text-[#1F4D35] font-bold">19h30</span>
+          <div className="grid grid12 gap-12 items-start">
+            {/* Esquerda: Sermon/Video */}
+            <div className="lg:col-span-7 col-span-12">
+              <div className="sermonCard group">
+                <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="playOverlay">
+                  <div className="text-center">
+                    <div className="playButton mx-auto mb-6 shadow-xl shadow-green/20 group-hover:scale-110 transition-transform">
+                      <Mic2 size={32} fill="currentColor" />
+                    </div>
+                    <h4 className="text-white text-3xl font-bold mb-6">A Palavra de Deus</h4>
+                    <button className="btn btnPrimary !bg-white !text-[#27432F] hover:!bg-orange hover:!text-white border-none shadow-lg">
+                      Assista ao Sermão ›
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mapCard">
-              <div className="mapPreview">
-                <div className="mapPin animate-bounce"></div>
+            {/* Direita: Info Grid */}
+            <div className="lg:col-span-4 col-span-12 flex flex-col gap-6">
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Rua Waldemar Falcão</h4>
+                  <p className="text-base font-bold text-green">Brotas de Macaúbas • BA</p>
+                </div>
               </div>
-              <div className="mapFooter">
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(settings.contact_address || 'Igreja Presbiteriana de Brotas de Macaúbas')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btnPrimary"
-                >
-                  Abrir no Google Maps <ExternalLink size={16} />
-                </a>
+
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
+                  <Clock size={24} />
+                </div>
+                <div>
+                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Horários dos Cultos</h4>
+                  <p className="text-base font-bold text-green">Domingo • 09:00h & 19:00h</p>
+                  <p className="text-base font-bold text-green">Quarta-feira • 19:30h</p>
+                </div>
+              </div>
+
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Fale Conosco</h4>
+                  <p className="text-base font-bold text-green">(77) 99999-9999</p>
+                  <p className="text-base font-bold text-green">contato@ipbbrotas.com.br</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 mt-12">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m13!1m3!1d3861.1502493325605!2d-42.6288!3d-12.0007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAyLjUiUyA0MsKwMzgnMDQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </section>
 
-      {/* Contribua */}
-      <section id="ofertas" className="section bg-[#1F4D35] text-white">
+      {/* Footer (Design Match) */}
+      <footer className="mainFooter">
         <div className="container">
-          <div className="donationCard">
-            <div className="donationInfo">
-              <div className="kicker !bg-white/10 !text-[#D29E65]">Dízimos e Ofertas</div>
-              <h2 className="!text-white mb-6">Apoie a Obra do Senhor</h2>
-              <p className="text-white/70 text-lg mb-8">
-                Sua generosidade sustenta o ministério pastoral, a manutenção do nosso templo e nossas ações sociais em Brotas de Macaúbas.
-              </p>
-
-              <div className="space-y-4">
-                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                  <span className="block text-[10px] font-black uppercase text-[#D29E65] mb-1">Dados Bancários</span>
-                  <p className="font-bold text-white">{settings.finance_bank1_name} • Ag: {settings.finance_bank1_agency} • CC: {settings.finance_bank1_account}</p>
-                </div>
-                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                  <span className="block text-[10px] font-black uppercase text-[#D29E65] mb-1">CNPJ Institucional</span>
-                  <p className="font-mono text-sm text-white">14.321.456/0001-90</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="qrWrap">
-              <span className="kicker !mb-4 mx-auto">Escanear PIX</span>
-              <img
-                src={settings.finance_pix_qr_url || `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(settings.finance_pix_key || '')}`}
-                alt="QR Code PIX"
-              />
-              <button
-                onClick={() => {
-                  if (settings.finance_pix_key) {
-                    navigator.clipboard.writeText(settings.finance_pix_key);
-                    alert('Chave PIX copiada com sucesso!');
-                  }
-                }}
-                className="btn btnPrimary w-full"
-              >
-                Copiar Chave Completa
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sermões */}
-      <section className="section">
-        <div className="container">
-          <div className="mb-12 flex justify-between items-end gap-6 flex-wrap">
-            <div>
-              <span className="kicker">Exposição Bíblica</span>
-              <h2>Últimas Pregações</h2>
-            </div>
-            <a href="#" className="btn btnSoft">Ver todos os sermões</a>
+          <div className="footerSocials">
+            <a href="#" className="hover:bg-orange transition-colors"><Instagram size={20} /></a>
+            <a href="#" className="hover:bg-orange transition-colors"><Twitter size={20} /></a>
+            <a href="#" className="hover:bg-orange transition-colors"><Youtube size={20} /></a>
           </div>
 
-          <div className="grid grid3">
-            {sermons.map(s => (
-              <div key={s.id} className="card group">
-                <div className="h-40 bg-slate-900 rounded-lg mb-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-green-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <Youtube size={32} className="text-white" />
-                  </div>
-                </div>
-                <span className="cardMeta">{new Date(s.date).toLocaleDateString('pt-BR')}</span>
-                <h3 className="cardTitle font-bold !text-lg !font-sans !mb-1">{s.title}</h3>
-                <p className="text-xs italic mb-2">Pastor: {s.pastor}</p>
-                <p className="text-sm line-clamp-2">{s.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer>
-        <div className="container">
           <div className="footerGrid">
-            <div className="footerBrand">
-              <div className="flex flex-col mb-6">
-                <span className="font-extrabold text-lg text-white leading-tight uppercase tracking-tight">Igreja Presbiteriana</span>
-                <span className="text-xs font-bold text-[#D29E65] uppercase tracking-widest leading-none">de Brotas de Macaúbas</span>
-              </div>
-              <p className="max-w-xs mb-8">Filiada à Igreja Presbiteriana do Brasil (IPB). Uma comunidade bíblica e acolhedora em Brotas.</p>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D29E65] transition-colors">
-                  <Instagram size={20} />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D29E65] transition-colors">
-                  <Twitter size={20} />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D29E65] transition-colors">
-                  <Youtube size={20} />
-                </a>
-              </div>
-            </div>
-
             <div className="footerCol">
-              <h4>Endereço</h4>
-              <p>{settings.contact_address}</p>
+              <h4>Nosso Endereço</h4>
+              <p className="flex items-center gap-2">
+                <MapPin size={14} /> Rua Waldemar Falcão, s/n<br />
+                Brotas de Macaúbas - BA
+              </p>
             </div>
-
             <div className="footerCol">
-              <h4>Cultos</h4>
-              <p>Domingo: 09h00 & 19h00<br />Quarta: 19h30 (Oração)</p>
+              <h4>Horários dos Cultos</h4>
+              <p>Domingo: 09:00h & 19:00h</p>
+              <p>Quarta-Feira: 19:30h</p>
             </div>
-
             <div className="footerCol">
-              <h4>Acesso</h4>
-              <Link to="/login" className="text-white/40 hover:text-white transition-colors text-sm">
-                Portal Administrativo
-              </Link>
+              <h4>Fale Conosco</h4>
+              <p>(77) 99994-9999</p>
+              <p>contato@ipbbrotas.org</p>
+            </div>
+            <div className="footerCol">
+              <h4>Redes Sociais</h4>
+              <p>Siga-nos no Instagram</p>
+              <p>Assista no Youtube</p>
             </div>
           </div>
 
-          <div className="mt-20 pt-8 border-t border-white/5 text-center text-[10px] font-black uppercase tracking-[0.2em] opacity-30">
-            © {new Date().getFullYear()} Igreja Presbiteriana • Portal Eclésia
+          <div className="footerBottom">
+            <p>© 2024 Igreja Presbiteriana de Brotas de Macaúbas. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
