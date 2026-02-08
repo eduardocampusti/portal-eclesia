@@ -301,14 +301,14 @@ p {
 /* Cards Estilo Imagem 2/3 */
 .eventCard {
   background: #fff;
-  border-radius: var(--radius);
+  border-radius: 8px;
   border: 1px solid var(--border);
   padding: 0;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
   height: 100%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
 }
 
 .eventCard::after {

@@ -108,8 +108,8 @@ const PublicLanding: React.FC = () => {
           <Link to="/" className="logoArea">
             <img src="/logo.jpg" alt="Logo IPB" />
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg text-[#27432F] leading-[1.1] uppercase tracking-[0.05em]">Igreja Presbiteriana</span>
-              <span className="text-[10px] font-extrabold text-[#D19E65] uppercase tracking-[0.3em] leading-none mt-1">de Brotas de Macaúbas</span>
+              <span className="font-extrabold text-xl text-[#27432F] leading-[1] uppercase tracking-[0.02em]">Igreja Presbiteriana</span>
+              <span className="text-[11px] font-extrabold text-[#D19E65] uppercase tracking-[0.15em] leading-[1.2]">de Brotas de Macaúbas</span>
             </div>
           </Link>
 
@@ -173,18 +173,18 @@ const PublicLanding: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-orange"><Sprout size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl">Nossa Fé</h3>
+              <div className="circleIcon !bg-[#D19E65]"><Sprout size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-[#27432F]">Nossa Fé</h3>
               <p className="text-sm leading-relaxed">Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.</p>
             </div>
             <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-orange"><Cross size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl">Nossa Missão</h3>
+              <div className="circleIcon !bg-[#D19E65]"><Cross size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-[#27432F]">Nossa Missão</h3>
               <p className="text-sm leading-relaxed">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
             </div>
             <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-orange"><User size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl">Como Participar</h3>
+              <div className="circleIcon !bg-[#D19E65]"><User size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-[#27432F]">Como Participar</h3>
               <p className="text-sm leading-relaxed">Entre em contato para eventos, cultos e grupos de estudos.</p>
             </div>
           </div>
@@ -203,81 +203,76 @@ const PublicLanding: React.FC = () => {
             <h2>Visite-nos</h2>
           </div>
 
-          <div className="grid grid12 gap-12 items-start">
-            {/* Esquerda: Sermon/Video */}
-            <div className="lg:col-span-7 col-span-12">
-              <div className="sermonCard group !rounded-3xl border border-white/10">
+          <div className="visitGrid items-start">
+            {/* Coluna 1: Sermon/Video */}
+            <div className="col-span-1">
+              <div className="sermonCard group !rounded-xl !shadow-none border border-slate-100">
                 <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="playOverlay !bg-green/40 backdrop-blur-[2px] group-hover:backdrop-blur-sm transition-all duration-500">
-                  <div className="text-center p-8">
-                    <div className="playButton mx-auto mb-8 shadow-2xl shadow-green/40 group-hover:scale-110 !w-20 !h-20">
-                      <Mic2 size={36} fill="currentColor" />
-                    </div>
-                    <h4 className="text-white text-4xl font-bold mb-8 tracking-tight">Assista aos nossos Cultos</h4>
-                    <button className="btn !bg-white !text-green hover:!bg-orange hover:!text-white border-none shadow-xl transition-all duration-500 font-bold uppercase tracking-widest text-[10px] px-8 py-4">
-                      Ver no Youtube ›
-                    </button>
-                  </div>
+                <div className="playOverlay !bg-[#27432F]/60 transition-all duration-500 flex flex-col items-center justify-end p-8">
+                  <h4 className="text-white text-2xl font-bold mb-4 tracking-tight">A Palavra de Deus</h4>
+                  <button className="bg-[#D19E65] text-white px-8 py-2.5 rounded text-[11px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-orange-dark transition-colors">
+                    Assista ao Sermão <ChevronRight size={14} />
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Direita: Info Grid */}
-            <div className="lg:col-span-5 col-span-12 flex flex-col gap-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
-                <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-orange shadow-sm">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1 leading-none">Rua Waldemar Falcão</h4>
-                    <p className="text-sm font-bold text-green">Brotas de Macaúbas • BA</p>
-                  </div>
+            {/* Coluna 2: Infos Lista */}
+            <div className="col-span-1 flex flex-col gap-6">
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
+                <div className="infoIconBox">
+                  <MapPin size={24} />
                 </div>
-
-                <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-orange shadow-sm">
-                    <Clock size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1 leading-none">Horários dos Cultos</h4>
-                    <p className="text-sm font-bold text-green">Domingo • 09:00h & 19:00h</p>
-                    <p className="text-sm font-bold text-green">Quarta-feira • 19:30h</p>
-                  </div>
+                <div>
+                  <h4 className="text-[10px] uppercase font-black text-[#D19E65] tracking-widest mb-1 leading-none">Rua Waldemar Falcão</h4>
+                  <p className="text-[13px] font-bold text-[#27432F]">Brotas de Macaúbas • BA</p>
                 </div>
+              </div>
 
-                <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-orange shadow-sm">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1 leading-none">Telefone</h4>
-                    <p className="text-sm font-bold text-green">(77) 99999-9999</p>
-                  </div>
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
+                <div className="infoIconBox">
+                  <Phone size={24} />
                 </div>
+                <div>
+                  <p className="text-[14px] font-bold text-[#27432F]">(77) 99912-3412</p>
+                </div>
+              </div>
 
-                <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-orange shadow-sm">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1 leading-none">E-mail</h4>
-                    <p className="text-sm font-bold text-green">contatobrotas@ipb.org.br</p>
-                  </div>
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
+                <div className="infoIconBox">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <p className="text-[14px] font-bold text-[#27432F]">contato@ipbbrotas.org</p>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 mt-12">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m13!1m3!1d3861.1502493325605!2d-42.6288!3d-12.0007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAyLjUiUyA0MsKwMzgnMDQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-            ></iframe>
+            {/* Coluna 3: Horários + Mapa */}
+            <div className="col-span-1 flex flex-col gap-6">
+              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
+                <div className="infoIconBox">
+                  <Plus size={24} />
+                </div>
+                <div>
+                  <h4 className="text-[11px] uppercase font-black text-[#D19E65] tracking-widest mb-2 leading-none">Horários dos Cultos</h4>
+                  <p className="text-[13px] font-bold text-[#27432F]">Dom • 09:00h & 19:00h</p>
+                  <p className="text-[13px] font-bold text-[#27432F]">Quarta • 19:30h</p>
+                </div>
+              </div>
+
+              <div className="rounded-xl overflow-hidden h-40 border border-slate-100 shadow-sm relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m13!1m3!1d3861.1502493325605!2d-42.6288!3d-12.0007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAyLjUiUyA0MsKwMzgnMDQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                ></iframe>
+                <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-black/5 rounded-xl"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
