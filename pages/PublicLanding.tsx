@@ -122,9 +122,9 @@ const PublicLanding: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent hidden md:inline-flex !py-3 !px-6 !text-[12px] !font-bold">
-              Horários dos Cultos <ChevronRight size={14} className="ml-1" />
-            </a>
+            <Link to="/login" className="btnAccent hidden md:inline-flex !py-3 !px-6 !text-[12px] !font-bold">
+              Acessar Sistema <ChevronRight size={14} className="ml-1" />
+            </Link>
             <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
