@@ -30,21 +30,23 @@ const TodayAtChurch: React.FC<TodayAtChurchProps> = ({ banners = [], mode = 'gri
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {activeSchedule.map((item, idx) => (
-                <div key={idx} className="eventCard group !p-0 overflow-hidden flex flex-col">
-                    <div className="p-8 pb-4">
-                        <h3 className="!text-xl !font-bold mb-2 group-hover:text-orange transition-colors duration-500">{item.title}</h3>
-                        <p className="text-sm !text-text-muted mb-1">{getWeekdayName(item.day)} - {item.time}</p>
-                        <p className="text-xs font-semibold !text-orange uppercase tracking-wider">{item.ministry}</p>
+                <div key={idx} className="eventCard group !p-0 overflow-hidden flex flex-col bg-white border border-bege shadow-sm rounded-lg hover:shadow-premium transition-all duration-500">
+                    <div className="p-8 pb-6">
+                        <h3 className="!text-xl !font-serif !text-green font-bold mb-4 group-hover:text-orange transition-colors duration-500">{item.title}</h3>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium text-green/60">{getWeekdayName(item.day)} - {item.time}</p>
+                            <p className="text-sm font-medium text-green/40">{item.ministry}</p>
+                        </div>
                     </div>
 
-                    <div className="relative h-48 mt-auto">
+                    <div className="relative h-44 mt-auto overflow-hidden">
                         <img
                             src="/hero.jpg"
                             alt={item.title}
-                            className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
+                            className="w-full h-full object-cover grayscale-[0.2] h-full group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                         />
-                        <div className="absolute inset-x-0 bottom-0 p-6 pt-10 bg-gradient-to-t from-white via-white/80 to-transparent">
-                            <button className="btnAccent w-full !rounded-md !py-3 !text-[11px] !font-bold uppercase tracking-widest shadow-xl shadow-orange/20">
+                        <div className="absolute inset-x-0 bottom-0 p-6 flex items-end justify-center bg-gradient-to-t from-black/20 to-transparent">
+                            <button className="btnAccent w-full !rounded-md !py-3.5 !text-[11px] !font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all duration-300">
                                 Adicionar ao Calendário <ChevronRight size={14} className="ml-1" />
                             </button>
                         </div>

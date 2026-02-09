@@ -116,8 +116,8 @@ const PublicLanding: React.FC = () => {
           <Link to="/" className="logoArea">
             <img src="/logo.jpg" alt="Logo IPB" />
             <div className="flex flex-col">
-              <span className="font-extrabold text-xl text-[#27432F] leading-[1] uppercase tracking-[0.02em]">Igreja Presbiteriana</span>
-              <span className="text-[11px] font-extrabold text-[#D19E65] uppercase tracking-[0.15em] leading-[1.2]">de Brotas de Macaúbas</span>
+              <span className="font-extrabold text-xl text-green leading-[1] uppercase tracking-[0.02em]">Igreja Presbiteriana</span>
+              <span className="text-[11px] font-extrabold text-orange uppercase tracking-[0.15em] leading-[1.2]">de Brotas de Macaúbas</span>
             </div>
           </Link>
 
@@ -130,9 +130,9 @@ const PublicLanding: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/login" className="btnAccent hidden md:inline-flex !py-3 !px-6 !text-[12px] !font-bold">
-              Acessar Sistema <ChevronRight size={14} className="ml-1" />
-            </Link>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent hidden md:inline-flex !py-3 !px-6 !text-[12px] !font-bold uppercase tracking-wider">
+              Horários dos Cultos <ChevronRight size={14} className="ml-1" />
+            </a>
             <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -147,8 +147,8 @@ const PublicLanding: React.FC = () => {
                 <Link to="/" className="logoArea" onClick={() => setIsMenuOpen(false)}>
                   <img src="/logo.jpg" alt="Logo IPB" className="h-10 w-auto" />
                   <div className="flex flex-col ml-3 text-left">
-                    <span className="font-extrabold text-sm text-[#27432F] leading-none uppercase">Igreja Presbiteriana</span>
-                    <span className="text-[8px] font-bold text-[#D19E65] uppercase tracking-wider">Brotas de Macaúbas</span>
+                    <span className="font-extrabold text-sm text-green leading-none uppercase">Igreja Presbiteriana</span>
+                    <span className="text-[8px] font-bold text-orange uppercase tracking-wider">de Brotas de Macaúbas</span>
                   </div>
                 </Link>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 text-[#27432F] hover:bg-slate-50 rounded-full transition-colors">
@@ -179,8 +179,8 @@ const PublicLanding: React.FC = () => {
       <section className="hero">
         <div className="container">
           <div className="heroContent animate-in fade-in slide-in-from-left duration-1000">
-            <h1 className="mb-8 tracking-tight !leading-[1.05]">Igreja Presbiteriana de Brotas de Macaúbas</h1>
-            <p className="heroSub text-xl !font-medium !italic tracking-wide !text-[#27432F]">
+            <h1 className="mb-8 tracking-tight !leading-[1.1] !font-serif text-green">Igreja Presbiteriana de Brotas de Macaúbas</h1>
+            <p className="heroSub text-xl !font-medium !italic tracking-wide !text-green">
               Pureza na Doutrina, <span className="text-orange">Simplicidade no Culto</span>, Santidade na Vida.
             </p>
             <div className="flex flex-wrap gap-4 mt-12">
@@ -215,20 +215,20 @@ const PublicLanding: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-[#D19E65]"><Sprout size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl !text-[#27432F]">Nossa Fé</h3>
-              <p className="text-sm leading-relaxed">Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.</p>
+            <div className="infoCard group !bg-bege">
+              <div className="circleIcon !bg-orange"><Sprout size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-green">Nossa Fé</h3>
+              <p className="text-sm leading-relaxed !text-green/70">Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.</p>
             </div>
-            <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-[#D19E65]"><Cross size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl !text-[#27432F]">Nossa Missão</h3>
-              <p className="text-sm leading-relaxed">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
+            <div className="infoCard group !bg-bege">
+              <div className="circleIcon !bg-orange"><Cross size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-green">Nossa Missão</h3>
+              <p className="text-sm leading-relaxed !text-green/70">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
             </div>
-            <div className="infoCard group !bg-[#F4F1EA]">
-              <div className="circleIcon !bg-[#D19E65]"><User size={36} strokeWidth={1.5} /></div>
-              <h3 className="mb-4 !text-2xl !text-[#27432F]">Como Participar</h3>
-              <p className="text-sm leading-relaxed">Entre em contato para eventos, cultos e grupos de estudos.</p>
+            <div className="infoCard group !bg-bege">
+              <div className="circleIcon !bg-orange"><User size={36} strokeWidth={1.5} /></div>
+              <h3 className="mb-4 !text-2xl !text-green">Como Participar</h3>
+              <p className="text-sm leading-relaxed !text-green/70">Entre em contato para eventos, cultos e grupos de estudos.</p>
             </div>
           </div>
 
@@ -251,9 +251,9 @@ const PublicLanding: React.FC = () => {
             <div className="col-span-1">
               <div className="sermonCard group !rounded-xl !shadow-none border border-slate-100">
                 <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="playOverlay !bg-[#27432F]/60 transition-all duration-500 flex flex-col items-center justify-end p-8">
+                <div className="playOverlay !bg-green/60 transition-all duration-500 flex flex-col items-center justify-end p-8">
                   <h4 className="text-white text-2xl font-bold mb-4 tracking-tight">A Palavra de Deus</h4>
-                  <button className="bg-[#D19E65] text-white px-8 py-2.5 rounded text-[11px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-orange-dark transition-colors">
+                  <button className="bg-orange text-white px-8 py-2.5 rounded text-[11px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-orange-dark transition-colors">
                     Assista ao Sermão <ChevronRight size={14} />
                   </button>
                 </div>
@@ -262,45 +262,45 @@ const PublicLanding: React.FC = () => {
 
             {/* Coluna 2: Infos Lista */}
             <div className="col-span-1 flex flex-col gap-6">
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
-                <div className="infoIconBox">
-                  <MapPin size={24} />
+              <div className="p-8 bg-bege rounded-xl flex items-center gap-6">
+                <div className="infoIconBox !bg-white">
+                  <MapPin size={24} className="text-orange" />
                 </div>
                 <div>
-                  <h4 className="text-[10px] uppercase font-black text-[#D19E65] tracking-widest mb-1 leading-none">Rua Waldemar Falcão</h4>
-                  <p className="text-[13px] font-bold text-[#27432F]">Brotas de Macaúbas • BA</p>
+                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1 leading-none">Rua Waldemar Falcão</h4>
+                  <p className="text-[13px] font-bold text-green">Brotas de Macaúbas • BA</p>
                 </div>
               </div>
 
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
-                <div className="infoIconBox">
-                  <Phone size={24} />
+              <div className="p-8 bg-bege rounded-xl flex items-center gap-6">
+                <div className="infoIconBox !bg-white">
+                  <Phone size={24} className="text-orange" />
                 </div>
                 <div>
-                  <p className="text-[14px] font-bold text-[#27432F]">(77) 99912-3412</p>
+                  <p className="text-[14px] font-bold text-green">(77) 99912-3412</p>
                 </div>
               </div>
 
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
-                <div className="infoIconBox">
-                  <Mail size={24} />
+              <div className="p-8 bg-bege rounded-xl flex items-center gap-6">
+                <div className="infoIconBox !bg-white">
+                  <Mail size={24} className="text-orange" />
                 </div>
                 <div>
-                  <p className="text-[14px] font-bold text-[#27432F]">contato@ipbbrotas.org</p>
+                  <p className="text-[14px] font-bold text-green">contato@pbbrotas.com.br</p>
                 </div>
               </div>
             </div>
 
             {/* Coluna 3: Horários + Mapa */}
             <div className="col-span-1 flex flex-col gap-6">
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6">
-                <div className="infoIconBox">
-                  <Plus size={24} />
+              <div className="p-8 bg-bege rounded-xl flex items-center gap-6">
+                <div className="infoIconBox !bg-white">
+                  <Plus size={24} className="text-orange" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] uppercase font-black text-[#D19E65] tracking-widest mb-2 leading-none">Horários dos Cultos</h4>
-                  <p className="text-[13px] font-bold text-[#27432F]">Dom • 09:00h & 19:00h</p>
-                  <p className="text-[13px] font-bold text-[#27432F]">Quarta • 19:30h</p>
+                  <h4 className="text-[11px] uppercase font-black text-orange tracking-widest mb-2 leading-none">Horários dos Cultos</h4>
+                  <p className="text-[13px] font-bold text-green">Dom • 09:00h & 19:00h</p>
+                  <p className="text-[13px] font-bold text-green">Quarta • 19:30h</p>
                 </div>
               </div>
 
@@ -345,17 +345,11 @@ const PublicLanding: React.FC = () => {
             </div>
             <div className="footerCol">
               <h4>Fale Conosco</h4>
-              <p className="flex items-center gap-2">
-                <Phone size={16} className="text-orange" /> (77) 99999-9999
-              </p>
-            </div>
-            <div className="footerCol">
-              <h4>Fale Conosco</h4>
-              <p className="flex items-center gap-2">
+              <p className="flex items-center gap-2 mb-2">
                 <Phone size={16} className="text-orange" /> (77) 99999-9999
               </p>
               <p className="flex items-center gap-2">
-                <Mail size={16} className="text-orange" /> contato@ipbrotas.com.br
+                <Mail size={16} className="text-orange" /> contato@pbbrotas.com.br
               </p>
             </div>
           </div>

@@ -16,7 +16,12 @@ export default {
                 orange: {
                     DEFAULT: '#D19E65',
                     light: '#fdfaf7',
+                    dark: '#b88a58',
                 },
+                bege: {
+                    DEFAULT: '#F4F1EA',
+                    light: '#FBFBFA',
+                }
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
