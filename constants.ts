@@ -37,7 +37,12 @@ export const CHURCH_BANK_INFO = {
 };
 
 export const WEEKLY_SCHEDULE = [
-  { day: 0, title: 'Escola Bíblica Dominical', time: '9:00h', ministry: 'Salão Social' },
-  { day: 0, title: 'Culto de Adoração', time: '19:00h', ministry: 'Templo' },
-  { day: 3, title: 'Reunião de Oração', time: '19:30h', ministry: 'Sala de Estudos' }
+  { day: 0, title: 'Momento de Oração', time: '06:00', ministry: 'Intercessão' },
+  { day: 0, title: 'Culto de Louvor', time: '18:30', ministry: 'Toda a Igreja' },
+  { day: 2, title: 'Momento ANA', time: '19:30', ministry: 'Mulheres' },
+  { day: 3, title: 'Estudo Bíblico', time: '19:30', ministry: 'Ensino' },
+  { day: 4, title: 'Boa Prosa', time: '19:00', ministry: 'Homens' },
+  { day: 5, title: 'Guerreiros', time: '19:30', ministry: 'Homens' },
+  { day: 5, title: 'A Liga', time: '19:30', ministry: 'Jovens' },
+  { day: 6, title: 'Tarde Feliz', time: '16:00', ministry: 'Infantil' }
 ];
