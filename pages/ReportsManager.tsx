@@ -75,9 +75,9 @@ const ReportsManager: React.FC = () => {
   }, {} as Record<string, number>);
 
   // Pegar a maior despesa (Categoria com maior gasto)
-  const sortedCategories = Object.entries(expensesByCategory).sort(([, a], [, b]) => (b as number) - (a as number));
-  const topExpenseCategory = sortedCategories.length > 0 ? sortedCategories[0] : ['Nenhuma', 0];
-  const topExpensePercentage = totalExpenses > 0 ? (((topExpenseCategory[1] as number) / totalExpenses) * 100).toFixed(0) : 0;
+  const sortedCategories = Object.entries(expensesByCategory).sort(([, a], [, b]) => Number(b) - Number(a));
+  const topExpenseCategory: [string, number] = sortedCategories.length > 0 ? (sortedCategories[0] as [string, number]) : ['Nenhuma', 0];
+  const topExpensePercentage = totalExpenses > 0 ? ((Number(topExpenseCategory[1]) / totalExpenses) * 100).toFixed(0) : 0;
 
   if (loading) {
     return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin text-blue-600" size={40} /></div>;

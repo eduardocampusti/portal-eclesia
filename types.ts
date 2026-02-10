@@ -40,7 +40,12 @@ export interface Event {
   date: string;
   location: string;
   description: string;
-  category: 'CULT' | 'MEETING' | 'OUTREACH' | 'CONFERENCE';
+  category: 'CULT' | 'MEETING' | 'OUTREACH' | 'CONFERENCE' | 'SPECIAL';
+  image_url?: string;
+  ministry?: string;
+  time?: string;
+  day_of_week?: number; // 0-6
+  is_recurring?: boolean;
 }
 
 export interface SocialAction {
@@ -115,4 +120,23 @@ export interface SiteSettings {
   finance_bank2_agency?: string;
   finance_bank2_account?: string;
   finance_pix_qr_url?: string;
+
+  // New Identity & Social Fields
+  logo_url?: string;
+  social_instagram?: string;
+  social_youtube?: string;
+  social_twitter?: string;
+
+  // About Cards
+  about_card1_title?: string;
+  about_card1_text?: string;
+  about_card2_title?: string;
+  about_card2_text?: string;
+  about_card3_title?: string;
+  about_card3_text?: string;
+
+  // Visiting & Footer
+  google_maps_url?: string;
+  schedule_summary?: string;
+  footer_copyright?: string;
 }

@@ -1,0 +1,1 @@
+﻿pages/SettingsManager.tsx(240,35): error TS2339: Property 'simplifySettings' does not exist on type '{ getUsers: () => Promise<User[]>; addUser: (u: Omit<User, "id"> & { password?: string; }) => Promise<void>; updateUser: (id: string, u: Partial<User> & { ...; }) => Promise<...>; ... 21 more ...; uploadImage: (file: File, bucket?: string) => Promise<...>; }'.

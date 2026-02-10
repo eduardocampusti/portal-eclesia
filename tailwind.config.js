@@ -10,12 +10,14 @@ export default {
         extend: {
             colors: {
                 green: {
-                    DEFAULT: '#27432F',
-                    dark: '#1a2d1f',
+                    DEFAULT: '#1B3022',
+                    dark: '#122117',
+                    soft: '#f0f4f1',
                 },
                 orange: {
-                    DEFAULT: '#D19E65',
-                    light: '#fdfaf7',
+                    DEFAULT: '#C87A3E',
+                    dark: '#A66533',
+                    light: '#FDF4EB',
                 },
             },
             fontFamily: {

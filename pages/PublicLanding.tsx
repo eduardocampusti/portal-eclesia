@@ -56,7 +56,21 @@ const PublicLanding: React.FC = () => {
     finance_bank2_agency: (CHURCH_BANK_INFO.accounts as any)[1]?.agency || '',
     finance_bank2_account: (CHURCH_BANK_INFO.accounts as any)[1]?.account || '',
     finance_pix_qr_url: '',
-    banners: []
+    banners: [],
+    // New Fields
+    logo_url: '/logo.png',
+    social_instagram: '',
+    social_youtube: '',
+    social_twitter: '',
+    about_card1_title: 'Cultos',
+    about_card1_text: 'Venha adorar conosco.',
+    about_card2_title: 'Estudo',
+    about_card2_text: 'Cresça na Palavra.',
+    about_card3_title: 'Missões',
+    about_card3_text: 'Servindo ao próximo.',
+    google_maps_url: '',
+    schedule_summary: 'Domingos 9h e 19h',
+    footer_copyright: `© ${new Date().getFullYear()} IPB Brotas. Todos os direitos reservados.`
   };
 
   const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
@@ -90,7 +104,17 @@ const PublicLanding: React.FC = () => {
         setSermons(s.slice(0, 3));
         setEvents(e.slice(0, 3));
         if (set) {
-          setSettings({ ...DEFAULT_SETTINGS, ...set });
+          // Merge settings but keep defaults if fetched values are empty
+          setSettings(prev => {
+            const merged = { ...prev };
+            Object.keys(set).forEach(key => {
+              const val = (set as any)[key];
+              if (val !== null && val !== undefined && val !== '') {
+                (merged as any)[key] = val;
+              }
+            });
+            return merged;
+          });
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -105,7 +129,7 @@ const PublicLanding: React.FC = () => {
       <header className="header">
         <div className="container headerInner">
           <Link to="/" className="logoArea">
-            <img src="/logo.jpg" alt="Logo IPB" />
+            <img src={settings.logo_url || "/logo.jpg"} alt="Logo IPB" />
             <div className="flex flex-col">
               <span className="font-extrabold text-lg text-[#27432F] leading-tight uppercase tracking-tight">IPB Brotas</span>
               <span className="text-[10px] font-bold text-[#D19E65] uppercase tracking-widest leading-none">Presbiteriana</span>
@@ -118,11 +142,14 @@ const PublicLanding: React.FC = () => {
             <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')}>Localização</a>
           </nav>
 
-          <div className="flex items-center gap-4">
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent hidden md:inline-flex">
-              Horários dos Cultos
+          <div className="flex items-center gap-6">
+            <Link to="/login" className="text-sm font-bold text-[#1B3022] hover:text-[#C87A3E] transition-colors">
+              Entrar
+            </Link>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent rounded-lg shadow-md hover:shadow-lg transition-all hidden md:flex items-center gap-2">
+              Horários dos Cultos <ChevronRight size={16} />
             </a>
-            <button className="lg:hidden p-2 text-[#27432F]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="lg:hidden p-2 text-[#1B3022]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
@@ -130,32 +157,42 @@ const PublicLanding: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden fixed inset-0 top-[90px] bg-white z-[110] p-8 flex flex-col gap-6 shadow-2xl animate-in fade-in zoom-in duration-300">
-            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-2xl font-bold text-[#27432F]">Sobre a IPB</a>
-            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-2xl font-bold text-[#27432F]">Programação</a>
-            <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="text-2xl font-bold text-[#27432F]">Localização</a>
-            <div className="mt-4 pt-6 border-t border-slate-100">
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent w-full">Horários dos Cultos</a>
+          <div className="lg:hidden fixed inset-0 top-[90px] bg-[#FDFBFA] z-[110] p-8 flex flex-col gap-6 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <a href="#sobre" onClick={(e) => scrollToSection(e, 'sobre')} className="text-2xl font-bold text-[#1B3022]">Sobre a IPB</a>
+            <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="text-2xl font-bold text-[#1B3022]">Programação</a>
+            <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="text-2xl font-bold text-[#1B3022]">Localização</a>
+            <div className="mt-4 pt-6 border-t border-slate-100 flex flex-col gap-4">
+              <Link to="/login" className="text-center py-4 font-bold text-[#1B3022]">Entrar / Login</Link>
+              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btnAccent w-full text-center">Horários dos Cultos</a>
             </div>
           </div>
         )}
       </header>
 
       {/* Hero Section (Design Match) */}
-      <section className="hero">
+      <section
+        className="hero"
+        style={{
+          backgroundImage: `url(${settings.hero_image_url || "/hero.jpg"})`,
+          backgroundAttachment: 'fixed' // Parallax effect for premium feel
+        }}
+      >
         <div className="container">
           <div className="heroContent animate-in fade-in slide-in-from-left duration-1000">
-            <h1 className="mb-8">Igreja Presbiteriana de Brotas de Macaúbas</h1>
-            <p className="heroSub">
-              Pureza na Doutrina, Simplicidade no Culto, Santidade na Vida.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-12">
-              <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary !px-10">
-                Ver horários
-              </a>
-              <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="btn btnSecondary !px-10 font-bold">
-                Como chegar <ChevronRight size={18} className="ml-1" />
-              </a>
+            <div className="flex flex-col items-start">
+              <span className="heroKicker mb-6">Uma Igreja Viva</span>
+              <h1 className="mb-6 drop-shadow-md">{settings.hero_title || DEFAULT_SETTINGS.hero_title}</h1>
+              <p className="heroSub mb-8 drop-shadow-md">
+                {settings.hero_subtitle || DEFAULT_SETTINGS.hero_subtitle}
+              </p>
+              <div className="flex flex-wrap gap-4 mt-2">
+                <a href="#agenda" onClick={(e) => scrollToSection(e, 'agenda')} className="btn btnPrimary !px-10 shadow-xl">
+                  Ver Programação
+                </a>
+                <a href="#visite" onClick={(e) => scrollToSection(e, 'visite')} className="btn btnSecondary !px-10 font-bold glass shadow-sm">
+                  Visitar agora <ChevronRight size={18} className="ml-1 text-orange" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -165,7 +202,8 @@ const PublicLanding: React.FC = () => {
       <section id="agenda" className="section bg-white">
         <div className="container">
           <div className="sectionTitle">
-            <h2>Próximos Encontros</h2>
+            <span className="kicker">Vida Comunitária</span>
+            <h2>{settings.mission_title || 'Próximos Encontros'}</h2>
           </div>
           <TodayAtChurch mode="grid" />
         </div>
@@ -175,17 +213,18 @@ const PublicLanding: React.FC = () => {
       <section id="sobre" className="section bg-[#FBFBFA]">
         <div className="container">
           <div className="sectionTitle">
-            <h2>Sobre Nós</h2>
+            <span className="kicker">Identidade</span>
+            <h2>{settings.about_title || 'Sobre Nós'}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="infoCard">
               <div className="circleIcon"><Compass size={32} /></div>
               <h3>Nossa Fé</h3>
-              <p className="text-sm">Nossa doutrina fundamental baseia-se puramente nas Escrituras Sagradas.</p>
+              <p className="text-sm">Nossa piedade fundamenta-se puramente nas Escrituras Sagradas.</p>
             </div>
             <div className="infoCard">
-              <div className="circleIcon"><Flame size={32} /></div>
+              <div className="circleIcon"><Flame size={32} fill="currentColor" /></div>
               <h3>Nossa Missão</h3>
               <p className="text-sm">Proclamar Jesus Cristo, manter a comunhão e fazer discípulos.</p>
             </div>
@@ -197,8 +236,11 @@ const PublicLanding: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <a href="#sobre" className="text-green font-bold text-lg inline-flex items-center gap-2 hover:gap-4 transition-all group">
-              Conheça nossa história <ChevronRight size={20} className="text-orange" />
+            <p className="max-w-2xl mx-auto mb-8 text-lg text-slate-600 italic">
+              "{settings.about_description}"
+            </p>
+            <a href="#sobre" className="text-green font-extrabold text-base inline-flex items-center gap-2 hover:gap-4 transition-all group">
+              Conheça nossa história <ChevronRight size={18} className="text-orange" />
             </a>
           </div>
         </div>
@@ -207,59 +249,62 @@ const PublicLanding: React.FC = () => {
       <section id="visite" className="section bg-white">
         <div className="container">
           <div className="sectionTitle">
+            <span className="kicker">Localização</span>
             <h2>Visite-nos</h2>
           </div>
 
-          <div className="grid grid12 gap-12 items-start">
-            {/* Esquerda: Sermon/Video */}
-            <div className="lg:col-span-7 col-span-12">
-              <div className="sermonCard group">
-                <img src="/hero.jpg" alt="A Palavra de Deus" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div className="grid grid12 gap-8 items-start">
+            {/* Esquerda: Sermon/Video (Model Match) */}
+            <div className="lg:col-span-6 col-span-12">
+              <div className="sermonCard group relative">
+                <img src={settings.hero_image_url || "/hero.jpg"} alt="A Palavra de Deus" className="w-full h-full object-cover" />
                 <div className="playOverlay">
                   <div className="text-center">
-                    <div className="playButton mx-auto mb-6 shadow-xl shadow-green/20 group-hover:scale-110 transition-transform">
-                      <Mic2 size={32} fill="currentColor" />
+                    <div className="playButton mx-auto mb-4 bg-white/20 backdrop-blur-md">
+                      <Mic2 size={32} className="text-white" />
                     </div>
-                    <h4 className="text-white text-3xl font-bold mb-6">A Palavra de Deus</h4>
-                    <button className="btn btnPrimary !bg-white !text-[#27432F] hover:!bg-orange hover:!text-white border-none shadow-lg">
-                      Assista ao Sermão ›
-                    </button>
                   </div>
+                </div>
+                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <h4 className="text-white text-xl font-bold mb-2">A Palavra de Deus</h4>
+                  <button className="btn btnAccent !py-2 !px-6 !text-xs uppercase tracking-widest">
+                    Assista ao Sermão ›
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Direita: Info Grid */}
-            <div className="lg:col-span-4 col-span-12 flex flex-col gap-6">
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
-                  <MapPin size={24} />
+            {/* Direita: Info List (Model Match) */}
+            <div className="lg:col-span-6 col-span-12 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-6 bg-[#F4F1EA] rounded-xl flex items-start gap-4">
+                  <MapPin size={24} className="text-orange shrink-0 mt-1" />
+                  <div>
+                    <h4 className="text-[11px] uppercase font-black text-orange tracking-widest mb-1">Rua Waldemar Falcão</h4>
+                    <p className="text-sm font-bold text-green">Domingo - 9:00h & 19:00h</p>
+                    <p className="text-sm font-bold text-green">Quarta-feira - 19:30h</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Rua Waldemar Falcão</h4>
-                  <p className="text-base font-bold text-green">Brotas de Macaúbas • BA</p>
-                </div>
-              </div>
 
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
-                  <Clock size={24} />
+                <div className="p-6 bg-[#F4F1EA] rounded-xl flex items-start gap-4">
+                  <div className="bg-orange p-1 rounded text-white font-bold text-[10px]">IPB</div>
+                  <div>
+                    <h4 className="text-[11px] uppercase font-black text-orange tracking-widest mb-1">Horários dos Cultos</h4>
+                    <p className="text-sm font-bold text-green">Domingo - 9:00h & 19:00h</p>
+                    <p className="text-sm font-bold text-green">Quarta-feira - 19:30h</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Horários dos Cultos</h4>
-                  <p className="text-base font-bold text-green">Domingo • 09:00h & 19:00h</p>
-                  <p className="text-base font-bold text-green">Quarta-feira • 19:30h</p>
-                </div>
-              </div>
 
-              <div className="p-8 bg-[#F4F1EA] rounded-xl flex items-center gap-6 group hover:translate-x-2 transition-transform">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange shadow-sm">
-                  <Phone size={24} />
+                <div className="p-6 bg-[#F4F1EA] rounded-xl flex items-start gap-4 col-span-1 md:col-span-2">
+                  <div className="w-8 h-8 rounded-full bg-green/10 flex items-center justify-center text-green">
+                    <Phone size={18} />
+                  </div>
+                  <p className="text-sm font-bold text-green">{settings.contact_phone}</p>
                 </div>
-                <div>
-                  <h4 className="text-[10px] uppercase font-black text-orange tracking-widest mb-1">Fale Conosco</h4>
-                  <p className="text-base font-bold text-green">(77) 99999-9999</p>
-                  <p className="text-base font-bold text-green">contato@ipbbrotas.com.br</p>
+
+                <div className="p-6 bg-[#F4F1EA] rounded-xl flex items-start gap-4 col-span-1 md:col-span-2">
+                  <div className="w-8 h-8 rounded-full bg-green/10 flex items-center justify-center text-green font-bold text-xs">✓</div>
+                  <p className="text-sm font-bold text-green">{settings.contact_email}</p>
                 </div>
               </div>
             </div>
@@ -267,12 +312,13 @@ const PublicLanding: React.FC = () => {
 
           <div className="grid grid-cols-1 mt-12">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m13!1m3!1d3861.1502493325605!2d-42.6288!3d-12.0007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAyLjUiUyA0MsKwMzgnMDQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15444.601449852236!2d-42.636657800000005!3d-12.000694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x74423877995648f%3A0xe6719b0d238c3867!2sIgreja%20Presbiteriana%20de%20Brotas%20de%20Maca%C3%BAbas!5e0!3m2!1spt-BR!2sbr!4v1739144400000!5m2!1spt-BR!2sbr"
               width="100%"
-              height="100%"
-              style={{ border: 0 }}
+              height="450"
+              style={{ border: 0, borderRadius: '24px', boxShadow: '0 12px 40px rgba(0,0,0,0.1)' }}
               allowFullScreen={true}
               loading="lazy"
+              title="Google Maps Location"
             ></iframe>
           </div>
         </div>
@@ -282,38 +328,40 @@ const PublicLanding: React.FC = () => {
       <footer className="mainFooter">
         <div className="container">
           <div className="footerSocials">
-            <a href="#" className="hover:bg-orange transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:bg-orange transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="hover:bg-orange transition-colors"><Youtube size={20} /></a>
+            {settings.social_instagram && (
+              <a href={settings.social_instagram} target="_blank" rel="noopener noreferrer" className="hover:bg-orange transition-colors"><Instagram size={20} /></a>
+            )}
+            {settings.social_twitter && (
+              <a href={settings.social_twitter} target="_blank" rel="noopener noreferrer" className="hover:bg-orange transition-colors"><Twitter size={20} /></a>
+            )}
+            {settings.social_youtube && (
+              <a href={settings.social_youtube} target="_blank" rel="noopener noreferrer" className="hover:bg-orange transition-colors"><Youtube size={20} /></a>
+            )}
           </div>
 
           <div className="footerGrid">
             <div className="footerCol">
               <h4>Nosso Endereço</h4>
               <p className="flex items-center gap-2">
-                <MapPin size={14} /> Rua Waldemar Falcão, s/n<br />
-                Brotas de Macaúbas - BA
+                <MapPin size={14} className="text-orange" /> {settings.contact_address}
               </p>
             </div>
             <div className="footerCol">
-              <h4>Horários dos Cultos</h4>
-              <p>Domingo: 09:00h & 19:00h</p>
-              <p>Quarta-Feira: 19:30h</p>
+              <h4>Programação</h4>
+              <p>Domingo - 9:00h & 19:00h</p>
+              <p>Quarta-feira - 19:30h</p>
             </div>
             <div className="footerCol">
               <h4>Fale Conosco</h4>
-              <p>(77) 99994-9999</p>
-              <p>contato@ipbbrotas.org</p>
-            </div>
-            <div className="footerCol">
-              <h4>Redes Sociais</h4>
-              <p>Siga-nos no Instagram</p>
-              <p>Assista no Youtube</p>
+              <p className="flex items-center gap-2 text-xs font-bold underline">
+                <Phone size={14} /> {settings.contact_phone}
+              </p>
+              <p className="text-[10px] opacity-60 break-all">{settings.contact_email}</p>
             </div>
           </div>
 
           <div className="footerBottom">
-            <p>© 2024 Igreja Presbiteriana de Brotas de Macaúbas. Todos os direitos reservados.</p>
+            <p>© {new Date().getFullYear()} {settings.footer_copyright || 'Igreja Presbiteriana de Brotas de Macaúbas. Todos os direitos reservados.'}</p>
           </div>
         </div>
       </footer>
